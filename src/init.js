@@ -1,5 +1,9 @@
-import app from "./server.js";
 import "./db";
+import "./models/User";
+import "./models/Board";
+import "./models/Card";
+import "./models/Task";
+import app from "./server.js";
 
 const PORT = 5000;
 
