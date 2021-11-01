@@ -3,6 +3,6 @@ import { watch } from "../controllers/todoController";
 
 const todoProjectRouter = express.Router();
 
-todoProjectRouter.get("/:id", watch);
+todoProjectRouter.get("/", watch);
 
 export default todoProjectRouter;

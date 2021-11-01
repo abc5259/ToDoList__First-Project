@@ -1,4 +1,5 @@
 import app from "./server.js";
+import "./db";
 
 const PORT = 5000;
 

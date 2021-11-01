@@ -6,7 +6,7 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title #{pageTitle} | #{siteName} 
   body 
+    include partials/header
     main 
-      block content 
-    footer 
-      span &copy; #{new Date().getFullYear()} ToDo
+      block content
+    include partials/footer 
