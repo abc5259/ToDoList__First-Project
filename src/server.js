@@ -3,8 +3,8 @@ import morgan from "morgan";
 import { localsMiddleware } from "./middleware";
 import apiRouter from "./routers/apiRouter";
 import rootRouter from "./routers/rootRouter";
-import todoProjectRouter from "./routers/todoProject";
 import userController from "./routers/userRouter";
+import boardRouter from "./routers/boardRouter";
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use(morgan("dev"));
 app.use(localsMiddleware);
 
 app.use("/", rootRouter);
-app.use("/todos", todoProjectRouter);
+app.use("/boards", boardRouter);
 app.use("/users", userController);
 app.use("/api", apiRouter);
 

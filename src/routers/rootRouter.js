@@ -1,5 +1,5 @@
 import express from "express";
-import { home } from "../controllers/todoController";
+import { home } from "../controllers/boardController";
 import { join, login } from "../controllers/userRouter";
 
 const rootRouter = express.Router();
