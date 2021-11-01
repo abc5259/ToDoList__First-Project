@@ -1,0 +1,29 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "Start first Project To Do List",
+  "scripts": {
+    "dev:server": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abc5259/ToDoList__First-Project.git"
+  },
+  "author": "LeeJaeHoon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abc5259/ToDoList__First-Project/issues"
+  },
+  "homepage": "https://github.com/abc5259/ToDoList__First-Project#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "nodemon": "^2.0.14"
+  }
+}
