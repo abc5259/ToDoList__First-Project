@@ -1,1 +1,25 @@
-
+.boards {
+  margin-top: 50px;
+  padding: 0px 80px;
+  .boards__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    h3 {
+      margin-left: 10px;
+      font-weight: 600;
+    }
+  }
+  .boards__create {
+    font-size: 14px;
+    cursor: pointer;
+    max-width: 200px;
+    min-width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #091e420a;
+  }
+}

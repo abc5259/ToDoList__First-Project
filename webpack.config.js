@@ -3,6 +3,7 @@ const path = require("path");
 module.exports = {
   entry: {
     main: "./src/client/js/main.js",
+    createBoard: "./src/client/js/createBoard.js",
   },
   mode: "development",
   watch: true,

@@ -5,13 +5,14 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet", href="/static/css/styles.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css")
     title #{pageTitle} | #{siteName} 
   body 
     if errorMessage 
       span=errorMessage
     include partials/header
-    main 
-      block content
+    block content
     include partials/footer 
     
-  script(src="/static/js/main.js") 
+    block scripts
+  
