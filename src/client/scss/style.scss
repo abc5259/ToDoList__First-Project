@@ -1,3 +1,8 @@
-body {
-  background-color: red;
-}
+//default
+@import "./reset.scss";
+
+// Components
+@import "./components/header.scss";
+
+// Screens
+@import "./screens/home.scss";
