@@ -11,6 +11,8 @@ header
         li Logout
       a(href="/profile")
         li=loggedInUser.name 
+      a(href="/boards/new")
+        li new board 
     else
       a(href="/login") 
         li Login 
