@@ -6,7 +6,13 @@ header
       li My To Do List 
     a(href="/todos/share") 
       li Share List  
-    a(href="/login") 
-      li Login 
-    a(href="/Join")
-      li Join    
+    if loggedIn
+      a(href="/logout") 
+        li Logout
+      a(href="/profile")
+        li=loggedInUser.name 
+    else
+      a(href="/login") 
+        li Login 
+      a(href="/Join")
+        li Join    
