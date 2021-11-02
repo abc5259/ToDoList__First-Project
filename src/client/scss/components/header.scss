@@ -1,0 +1,27 @@
+header {
+  // height: 100px;
+  background-color: #026aa7;
+  color: $header-color;
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  ul {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .header__column {
+      .header__title {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+    }
+    .header__column:last-child {
+      display: flex;
+      li {
+        margin-left: 30px;
+      }
+    }
+  }
+}

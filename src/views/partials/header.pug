@@ -1,20 +1,18 @@
 header 
-  ul 
-    a(href="/") 
-      li Home Logo
-    a(href="/todos")  
-      li My To Do List 
-    a(href="/todos/share") 
-      li Share List  
-    if loggedIn
-      a(href="/logout") 
-        li Logout
-      a(href="/profile")
-        li=loggedInUser.name 
-      a(href="/boards/new")
-        li new board 
-    else
-      a(href="/login") 
-        li Login 
-      a(href="/Join")
-        li Join    
+  ul
+    div.header__column 
+      a(href="/").header__title
+        li ToDo
+    div.header__column 
+      if loggedIn
+        a(href="/boards/new")
+          li New board 
+        a(href="/logout") 
+          li Logout
+        a(href="/profile")
+          li=loggedInUser.name 
+      else
+        a(href="/login") 
+          li Login 
+        a(href="/Join")
+          li Join    
