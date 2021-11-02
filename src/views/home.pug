@@ -8,20 +8,26 @@ block content
         i.far.fa-user 
         h3 Your Workspace boards
       div.boards__create Create new board
-    form.boards__create-modal(method="POST") 
-      div.boards__create-modal__header 
-        input(type="text", name="title", placeholder="Add board title")
-        i.fas.fa-times
-      div.boards__create-backgroundColors 
-        div.boards__create-backgroundColor blue 
-        div.boards__create-backgroundColor green 
-        div.boards__create-backgroundColor skyblue 
-        div.boards__create-backgroundColor pink 
-        div.boards__create-backgroundColor 보라색 
-        div.boards__create-backgroundColor red 
-        div.boards__create-backgroundColor grey 
-        div.boards__create-backgroundColor yellow 
-        div.boards__create-backgroundColor 주황색
+    section.modal
+      form.boards__create-modal(method="POST") 
+        div.boards__create-modal__column 
+          div.boards__create-modal__header 
+            input(type="text", name="title", placeholder="Add board title")
+            i.fas.fa-times
+            div.boards__create-modal__subtitle #{loggedInUser.name}'s Workspace
+          ul.boards__create-backgroundColors 
+            li.boards__create-backgroundColor(data-color="#0079bf") 
+              i.fas.fa-check
+            li.boards__create-backgroundColor(data-color="#d29034") 
+            li.boards__create-backgroundColor(data-color="#519839")
+            li.boards__create-backgroundColor(data-color="#896092") 
+            li.boards__create-backgroundColor(data-color="#cd5a91") 
+            li.boards__create-backgroundColor(data-color="#4bbf6b") 
+            li.boards__create-backgroundColor(data-color="#00aecc") 
+            li.boards__create-backgroundColor(data-color="#838c91") 
+            li.boards__create-backgroundColor(data-color="#b04632") 
+        div.boards__create-modal__column 
+          button Create Board
 
 block scripts 
   script(src="/static/js/createBoard.js") 
