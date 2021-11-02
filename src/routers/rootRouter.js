@@ -3,7 +3,7 @@ import { home } from "../controllers/boardController";
 import {
   getJoin,
   getLogin,
-  login,
+  logout,
   postJoin,
   postLogin,
 } from "../controllers/userRouter";
@@ -11,6 +11,7 @@ import {
 const rootRouter = express.Router();
 
 rootRouter.get("/", home);
+rootRouter.get("/logout", logout);
 rootRouter.route("/join").get(getJoin).post(postJoin);
 rootRouter.route("/login").get(getLogin).post(postLogin);
 
