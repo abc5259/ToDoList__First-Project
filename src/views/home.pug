@@ -12,8 +12,8 @@ block content
       form.boards__create-modal(method="POST") 
         div.boards__create-modal__column 
           div.boards__create-modal__header 
-            input(type="text", name="title", placeholder="Add board title")
-            i.fas.fa-times
+            input(type="text", required ,name="title", placeholder="Add board title")
+            i.fas.fa-times.modal__delete
             div.boards__create-modal__subtitle #{loggedInUser.name}'s Workspace
           ul.boards__create-backgroundColors 
             li.boards__create-backgroundColor(data-color="#0079bf") 
