@@ -13,7 +13,7 @@ block board
     section
       ul.board-lists
         each list in board.lists
-          li.board-list 
+          li.board-list(draggable="true")
             div.board-list__title 
               h3=list.title
               i.fas.fa-ellipsis-h
@@ -25,6 +25,8 @@ block board
             //-   i.fas.fa-edit
 block scripts 
   script(src="/static/js/createList.js") 
+  if board.lists.length > 0
+    script(src="/static/js/cardDageAndDrop.js") 
             
             
 
