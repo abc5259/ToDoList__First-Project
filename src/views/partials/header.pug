@@ -1,8 +1,12 @@
-header 
+header
   ul
     div.header__column 
-      a(href="/").header__title
-        li ToDo
+      if loggedIn
+        a(href="/users/home").header__title
+          li ToDo
+      else  
+        a(href="/").header__title
+          li ToDo
     div.header__column 
       if loggedIn
         a(href="/boards/new")

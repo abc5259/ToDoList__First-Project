@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import { async } from "regenerator-runtime";
 import User from "../models/User";
 
 //root
@@ -32,7 +33,7 @@ export const postJoin = async (req, res) => {
 };
 
 export const getLogin = (req, res) => {
-  res.render("login", { pageTitle: "Login" });
+  return res.render("login", { pageTitle: "Login" });
 };
 
 export const postLogin = async (req, res) => {
@@ -54,7 +55,7 @@ export const postLogin = async (req, res) => {
   }
   req.session.loggedIn = true;
   req.session.user = user;
-  return res.status(200).redirect("/");
+  return res.status(200).redirect("/users/home");
 };
 
 export const logout = (req, res) => {
@@ -63,6 +64,20 @@ export const logout = (req, res) => {
 };
 
 //user
+
+export const userHome = async (req, res) => {
+  const { user: sessionUser } = req.session;
+  const pageTitle = "Home";
+  const user = await User.findById(sessionUser._id).populate("boards");
+  if (!user) {
+    return res
+      .status(404)
+      .render("userHome", { errorMessage: "User not found", pageTitle });
+  }
+  return res
+    .status(200)
+    .render("user/userHome", { pageTitle: "userHome", user });
+};
 
 export const profile = (req, res) => {
   return res.render("user/profile", { pageTitle: "Profile" });

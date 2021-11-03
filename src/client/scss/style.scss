@@ -10,8 +10,12 @@
 @import "./components/modal.scss";
 
 // Screens
-@import "./screens/home.scss";
+@import "./screens/userHome.scss";
 
 body {
   font-family: "Open Sans", sans-serif;
+}
+
+.wrapper {
+  margin-top: 100px;
 }

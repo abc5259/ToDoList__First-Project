@@ -1,15 +1,23 @@
 //root
+import { async } from "regenerator-runtime";
 import Board from "../models/Board";
 import User from "../models/User";
 
-export const home = (req, res) => {
+export const home = async (req, res) => {
   return res.render("home", { pageTitle: "Home" });
 };
 
 //board
 
-export const watch = (req, res) => {
-  res.render("board/watch", { pageTitle: "Board Watch" });
+export const watch = async (req, res) => {
+  const { id } = req.params;
+  const board = await Board.findById(id);
+  if (!board) {
+    return res
+      .statue(404)
+      .render("board/watch", { pageTitle: "Board Not Found" });
+  }
+  res.render("board/watch", { pageTitle: "Board Watch", board });
 };
 
 //api

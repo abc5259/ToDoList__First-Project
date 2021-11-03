@@ -2,6 +2,6 @@ extends base
 
 block content
   form(method="POST") 
-    input(type="email", required, name="email", placeholder="Email")
-    input(type="password", required, name="password", placeholder="Password")
-    input(type="submit", value="Login")
+    input(type="email", required, name="email", placeholder="Email",autocomplete)
+    input(type="password", required, name="password", placeholder="Password",autocomplete)
+    input(type="submit", value="Login",autocomplete)

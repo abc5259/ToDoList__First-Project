@@ -4,10 +4,12 @@ import {
   logout,
   profile,
   changePassword,
+  userHome,
 } from "../controllers/userRouter";
 
 const userController = express.Router();
 
+userController.get("/home", userHome);
 userController.get("/logout", logout);
 userController.get("/edit", edit);
 userController.get("/changePassword", changePassword);

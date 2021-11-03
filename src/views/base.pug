@@ -11,7 +11,8 @@ html(lang="en")
     if errorMessage 
       span=errorMessage
     include partials/header
-    block content
+    div.wrapper
+      block content
     include partials/footer 
     
     script(src="/static/js/main.js") 
