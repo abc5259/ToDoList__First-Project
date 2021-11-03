@@ -1,42 +1,94 @@
-.board__header {
-  display: flex;
-  // justify-content: center;
-  align-items: center;
-}
-
 #board {
   padding: 70px 20px;
   height: 100vh;
-  .board__title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #ffffff;
-    margin-right: 20px;
-  }
-}
-
-.board__addList-form {
-  display: flex;
-  justify-content: space-between;
-  background-color: #ffffffe8;
-  border-radius: 5px;
-  padding: 10px;
-  input {
-    border: none;
-    border: 1px solid #036aa5;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin-right: 10px;
-  }
-  .board__addList-submit {
+  .board__header {
     display: flex;
     align-items: center;
-    button {
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      background-color: #036aa5;
+    .board__title {
+      font-size: 1.5rem;
+      font-weight: 600;
       color: #ffffff;
+      margin-right: 20px;
+    }
+    .board__addList-form {
+      display: flex;
+      justify-content: space-between;
+      background-color: #ffffffe8;
+      border-radius: 5px;
+      padding: 10px;
+      input {
+        border: none;
+        border: 2px solid #036aa5;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin-right: 10px;
+        &:focus {
+          outline: none;
+        }
+      }
+      .board__addList-submit {
+        display: flex;
+        align-items: center;
+        button {
+          border: none;
+          border-radius: 5px;
+          padding: 10px 20px;
+          background-color: #036aa7;
+          color: #ffffff;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  section {
+    margin-top: 20px;
+    ul.board-lists {
+      display: grid;
+      grid-template-columns: repeat(4, 280px);
+      column-gap: 10px;
+      li.board-list {
+        padding: 15px 10px;
+        border-radius: 5px;
+        background-color: #ebecf0;
+        .board-list__title {
+          font-size: 1.1rem;
+          font-weight: 600;
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        }
+        .board-list__form {
+          display: flex;
+          justify-content: space-between;
+          input {
+            border: none;
+            border: 1px solid #036aa5;
+            border-radius: 5px;
+            padding: 10px 20px;
+            &:focus {
+              outline: none;
+            }
+          }
+          button {
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            background-color: #036aa7;
+            color: #ffffff;
+            cursor: pointer;
+          }
+        }
+
+        .board-list__tasks {
+          margin-top: 10px;
+          display: flex;
+          justify-content: space-between;
+          border-radius: 5px;
+          background-color: #ffffff;
+          padding: 10px 20px;
+        }
+      }
     }
   }
 }

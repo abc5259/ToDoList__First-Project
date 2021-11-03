@@ -7,7 +7,21 @@ block board
         h1=board.title 
       div.board__addList
         form.board__addList-form(method="POST")
-          input(type="text", placeholder="리스트의 제목을 입력하세요!")  
+          input(type="text", placeholder="리스트의 제목을 입력하세요")  
           div.board__addList-submit
             button Add list 
+    section
+      ul.board-lists
+        li.board-list 
+          div.board-list__title 
+            h3 list의 제목 
+            span delet list 
+          form.board-list__form
+            input(type="text", name="title", placeholder="카드의 제목 입력...")
+            button Add 
+          div.board-list__tasks 
+            h6 card의 제목 
+            span delete
+            
+            
 
