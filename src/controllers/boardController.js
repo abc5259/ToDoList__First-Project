@@ -1,6 +1,7 @@
 //root
 import { async } from "regenerator-runtime";
 import Board from "../models/Board";
+import List from "../models/List";
 import User from "../models/User";
 
 export const home = async (req, res) => {
@@ -11,7 +12,7 @@ export const home = async (req, res) => {
 
 export const watch = async (req, res) => {
   const { id } = req.params;
-  const board = await Board.findById(id);
+  const board = await Board.findById(id).populate("lists");
   if (!board) {
     return res
       .statue(404)
@@ -37,4 +38,23 @@ export const createBoard = async (req, res) => {
   await user.save();
   req.session.user = user;
   return res.status(201).json({ board });
+};
+
+export const createList = async (req, res) => {
+  const {
+    params: { id },
+    body: { title },
+  } = req;
+  const board = await Board.findById(id);
+  if (!board) {
+    return res.sendStatus(404);
+  }
+  const list = await List.create({
+    board: board._id,
+    title,
+  });
+  board.lists.push(list._id);
+  await board.save();
+  console.log(board, list);
+  return res.sendStatus(201);
 };

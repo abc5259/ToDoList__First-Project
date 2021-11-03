@@ -1,7 +1,7 @@
 extends ../base
 
 block board 
-  main(style=`background-color: ${board.backgroundColor}`)#board
+  main(style=`background-color: ${board.backgroundColor}`, data-id=board._id)#board
     div.board__header
       div.board__title 
         h1=board.title 
@@ -12,16 +12,19 @@ block board
             button Add list 
     section
       ul.board-lists
-        li.board-list 
-          div.board-list__title 
-            h3 list의 제목 
-            span delet list 
-          form.board-list__form
-            input(type="text", name="title", placeholder="카드의 제목 입력...")
-            button Add 
-          div.board-list__tasks 
-            h6 card의 제목 
-            span delete
+        each list in board.lists
+          li.board-list 
+            div.board-list__title 
+              h3=list.title
+              i.fas.fa-ellipsis-h
+            form.board-list__form
+              input(type="text", name="title", placeholder="카드의 제목 입력...")
+              button Add 
+            //- div.board-list__tasks 
+            //-   h6 card의 제목 
+            //-   i.fas.fa-edit
+block scripts 
+  script(src="/static/js/createList.js") 
             
             
 

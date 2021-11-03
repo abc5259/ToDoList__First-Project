@@ -48,19 +48,30 @@
       grid-template-columns: repeat(4, 280px);
       column-gap: 10px;
       li.board-list {
-        padding: 15px 10px;
+        padding: 5px 10px;
         border-radius: 5px;
         background-color: #ebecf0;
         .board-list__title {
           font-size: 1.1rem;
           font-weight: 600;
           display: flex;
+          align-items: center;
           justify-content: space-between;
           margin-bottom: 10px;
+          i {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            &:hover {
+              background-color: #dadbe2;
+            }
+          }
         }
         .board-list__form {
           display: flex;
           justify-content: space-between;
+          margin-bottom: 10px;
           input {
             border: none;
             border: 1px solid #036aa5;
@@ -81,12 +92,31 @@
         }
 
         .board-list__tasks {
-          margin-top: 10px;
+          cursor: pointer;
           display: flex;
           justify-content: space-between;
+          align-items: center;
           border-radius: 5px;
           background-color: #ffffff;
-          padding: 10px 20px;
+          padding: 3px 10px;
+          margin-bottom: 10px;
+          i {
+            font-weight: 300;
+            opacity: 0;
+            cursor: pointer;
+            padding: 7px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            &:hover {
+              background-color: #dadbe2;
+            }
+          }
+          &:hover {
+            background-color: #f4f5f7;
+            i {
+              opacity: 1;
+            }
+          }
         }
       }
     }
