@@ -27,9 +27,10 @@ block content
             li.boards__create-backgroundColor(data-color="#838c91") 
             li.boards__create-backgroundColor(data-color="#b04632") 
         div.boards__create-modal__column 
-          button Create Board
+          button Create Board 
 
 block scripts 
-  script(src="/static/js/createBoard.js") 
+  if loggedIn
+    script(src="/static/js/createBoard.js") 
 
 

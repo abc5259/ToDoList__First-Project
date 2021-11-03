@@ -24,7 +24,8 @@
     "express-session": "^1.17.2",
     "mongoose": "^6.0.12",
     "morgan": "^1.10.0",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

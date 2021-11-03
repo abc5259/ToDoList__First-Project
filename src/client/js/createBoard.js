@@ -4,6 +4,9 @@ const deleteBtn = document.querySelector(".modal__delete");
 const backgroundColorlists = document.querySelector(
   ".boards__create-backgroundColors"
 );
+const formElem = document.querySelector(".boards__create-modal");
+const inputElem = formElem.querySelector("input");
+
 let currentColorElem = document.querySelector("li[data-color='#0079bf']");
 const clickCreateBoard = e => {
   modal.classList.add("show");
@@ -38,7 +41,33 @@ const selectColor = e => {
   }
 };
 
+const handleCreateBoard = async e => {
+  e.preventDefault();
+  const backgroundColor = currentColorElem.dataset.color;
+  const title = inputElem.value;
+  console.log(backgroundColor, title);
+  const response = await fetch("/api/board/create", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      backgroundColor,
+      title,
+    }),
+  });
+  const json = await response.json();
+  console.log(json);
+  if (response.status === 201) {
+    console.log("ds");
+    const a = document.createElement("a");
+    a.href = `/boards/${json.board._id}`;
+    a.click();
+  }
+};
+
 createBoardElem.addEventListener("click", clickCreateBoard);
 modal.addEventListener("click", handleModalClick);
 deleteBtn.addEventListener("click", handleDeleteBtn);
 backgroundColorlists.addEventListener("click", selectColor);
+formElem.addEventListener("submit", handleCreateBoard);

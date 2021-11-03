@@ -28,7 +28,7 @@ export const postJoin = async (req, res) => {
     password,
   });
   console.log(req.session);
-  res.redirect("/login");
+  return res.redirect("/login");
 };
 
 export const getLogin = (req, res) => {
@@ -54,7 +54,7 @@ export const postLogin = async (req, res) => {
   }
   req.session.loggedIn = true;
   req.session.user = user;
-  res.status(200).redirect("/");
+  return res.status(200).redirect("/");
 };
 
 export const logout = (req, res) => {
@@ -65,13 +65,13 @@ export const logout = (req, res) => {
 //user
 
 export const profile = (req, res) => {
-  res.render("user/profile", { pageTitle: "Profile" });
+  return res.render("user/profile", { pageTitle: "Profile" });
 };
 
 export const edit = (req, res) => {
-  res.render("user/edit", { pageTitle: "User Edit" });
+  return res.render("user/edit", { pageTitle: "User Edit" });
 };
 
 export const changePassword = (req, res) => {
-  res.render("user/change-password", { pageTitle: "Change Password" });
+  return res.render("user/change-password", { pageTitle: "Change Password" });
 };

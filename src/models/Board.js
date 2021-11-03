@@ -8,5 +8,5 @@ const boardSchema = new mongoose.Schema({
   backgroundColor: { type: String, default: "green" },
 });
 
-const Board = mongoose.model("Todo", boardSchema);
+const Board = mongoose.model("Board", boardSchema);
 export default Board;

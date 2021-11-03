@@ -1,3 +1,2 @@
 import "../scss/style.scss";
-
-console.log("hi");
+import "regenerator-runtime/runtime.js";
