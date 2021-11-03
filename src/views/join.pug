@@ -1,9 +1,10 @@
 extends base
 
 block content
-  form(method="POST") 
-    input(type="email", required, name="email", placeholder="Email")
-    input(type="name", required, name="name", placeholder="Name")
-    input(type="password", required, name="password", placeholder="password")
-    input(type="password", required, name="password2", placeholder="password 확인")
-    input(type="submit", value="Join")
+  div.wrapper
+    form(method="POST") 
+      input(type="email", required, name="email", placeholder="Email")
+      input(type="name", required, name="name", placeholder="Name")
+      input(type="password", required, name="password", placeholder="password")
+      input(type="password", required, name="password2", placeholder="password 확인")
+      input(type="submit", value="Join")

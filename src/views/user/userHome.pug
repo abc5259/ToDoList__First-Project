@@ -1,35 +1,36 @@
 extends ../base.pug 
 
 block content   
-  section.boards
-    div.boards__header 
-      i.far.fa-user 
-      h3 Your Workspace boards
-    div.boards__all 
-      each board in user.boards
-        a(href=`/boards/${board._id}`) 
-          div.boards__user(style=`background-color:${board.backgroundColor}`) #{board.title}
-      div.boards__create Create new board
-  section.modal
-    form.boards__create-modal(method="POST") 
-      div.boards__create-modal__column 
-        div.boards__create-modal__header 
-          input(type="text", required ,name="title", placeholder="Add board title")
-          i.fas.fa-times.modal__delete
-          div.boards__create-modal__subtitle #{loggedInUser.name}'s Workspace
-        ul.boards__create-backgroundColors 
-          li.boards__create-backgroundColor(data-color="#0079bf") 
-            i.fas.fa-check
-          li.boards__create-backgroundColor(data-color="#d29034") 
-          li.boards__create-backgroundColor(data-color="#519839")
-          li.boards__create-backgroundColor(data-color="#896092") 
-          li.boards__create-backgroundColor(data-color="#cd5a91") 
-          li.boards__create-backgroundColor(data-color="#4bbf6b") 
-          li.boards__create-backgroundColor(data-color="#00aecc") 
-          li.boards__create-backgroundColor(data-color="#838c91") 
-          li.boards__create-backgroundColor(data-color="#b04632") 
-      div.boards__create-modal__column 
-        button Create Board 
+  div.wrapper
+    section.boards
+      div.boards__header 
+        i.far.fa-user 
+        h3 Your Workspace boards
+      div.boards__all 
+        each board in user.boards
+          a(href=`/boards/${board._id}`) 
+            div.boards__user(style=`background-color:${board.backgroundColor}`) #{board.title}
+        div.boards__create Create new board
+    section.modal
+      form.boards__create-modal(method="POST") 
+        div.boards__create-modal__column 
+          div.boards__create-modal__header 
+            input(type="text", required ,name="title", placeholder="Add board title")
+            i.fas.fa-times.modal__delete
+            div.boards__create-modal__subtitle #{loggedInUser.name}'s Workspace
+          ul.boards__create-backgroundColors 
+            li.boards__create-backgroundColor(data-color="#0079bf") 
+              i.fas.fa-check
+            li.boards__create-backgroundColor(data-color="#d29034") 
+            li.boards__create-backgroundColor(data-color="#519839")
+            li.boards__create-backgroundColor(data-color="#896092") 
+            li.boards__create-backgroundColor(data-color="#cd5a91") 
+            li.boards__create-backgroundColor(data-color="#4bbf6b") 
+            li.boards__create-backgroundColor(data-color="#00aecc") 
+            li.boards__create-backgroundColor(data-color="#838c91") 
+            li.boards__create-backgroundColor(data-color="#b04632") 
+        div.boards__create-modal__column 
+          button Create Board 
 
 block scripts 
   if loggedIn

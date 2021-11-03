@@ -1,5 +1,13 @@
 extends ../base
 
-block content 
+block board 
   main(style=`background-color: ${board.backgroundColor}`)#board
-    h1=board.title 
+    div.board__header
+      div.board__title 
+        h1=board.title 
+      div.board__addList
+        form.board__addList-form(method="POST")
+          input(type="text", placeholder="리스트의 제목을 입력하세요!")  
+          div.board__addList-submit
+            button Add list 
+

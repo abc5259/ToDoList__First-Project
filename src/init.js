@@ -2,7 +2,7 @@ import "dotenv/config";
 import "./db";
 import "./models/User";
 import "./models/Board";
-import "./models/Card";
+import "./models/List";
 import "./models/Task";
 import app from "./server.js";
 

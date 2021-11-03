@@ -3,7 +3,8 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #026aa7;
+  background-color: rgba($color: #036aa5, $alpha: 0.8);
+  font-weight: bold;
   color: $header-color;
   a {
     text-decoration: none;

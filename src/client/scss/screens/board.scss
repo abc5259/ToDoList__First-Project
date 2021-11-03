@@ -1,0 +1,42 @@
+.board__header {
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+}
+
+#board {
+  padding: 70px 20px;
+  height: 100vh;
+  .board__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-right: 20px;
+  }
+}
+
+.board__addList-form {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffffe8;
+  border-radius: 5px;
+  padding: 10px;
+  input {
+    border: none;
+    border: 1px solid #036aa5;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-right: 10px;
+  }
+  .board__addList-submit {
+    display: flex;
+    align-items: center;
+    button {
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      background-color: #036aa5;
+      color: #ffffff;
+    }
+  }
+}
