@@ -58,3 +58,19 @@ export const createList = async (req, res) => {
   console.log(board, list);
   return res.sendStatus(201);
 };
+
+export const updateList = async (req, res) => {
+  const {
+    params: { id },
+    body: { listTitle, currentIndex },
+  } = req;
+  const board = await Board.findById(id).populate("lists");
+  if (!board) {
+    return res.sendStatus(404);
+  }
+  const preIndex = board.lists.findIndex(i => i.title === listTitle);
+  const item = board.lists.splice(preIndex, 1);
+  board.lists.splice(currentIndex, 0, item[0]);
+  await board.save();
+  return res.sendStatus(201);
+};

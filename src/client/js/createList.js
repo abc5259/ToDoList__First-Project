@@ -7,38 +7,59 @@ if (boardLists.childNodes) {
   lists = document.querySelectorAll(".board-list");
 }
 
-let draggingCard = null;
+let draggingList = null;
 let currentdrag;
 let target;
+
+const updateList = async () => {
+  console.log(draggingList.querySelector("h3").innerText);
+  const listTitle = draggingList.querySelector("h3").innerText;
+  let currentIndex;
+  boardLists.childNodes.forEach((lists, i) => {
+    if (lists === draggingList) {
+      return (currentIndex = i);
+    }
+  });
+  console.log(currentIndex);
+  await fetch(`/api/board/${board.dataset.id}/list/update`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      listTitle,
+      currentIndex,
+    }),
+  });
+};
 
 const handleDragOver = list => {
   list.addEventListener("dragover", e => {
     e.preventDefault();
+    draggingList = document.querySelector(".dragging");
     boardLists.childNodes.forEach((lists, i) => {
-      if (lists === draggingCard) {
+      if (lists === draggingList) {
         currentdrag = i;
       }
       if (lists === list) {
         target = i;
       }
     });
-    console.log(currentdrag, target);
     if (currentdrag > target) {
-      boardLists.insertBefore(draggingCard, list);
+      boardLists.insertBefore(draggingList, list);
     } else {
-      boardLists.insertBefore(list, draggingCard);
+      boardLists.insertBefore(list, draggingList);
     }
   });
 };
 
 const registerEventsOnList = list => {
   list.addEventListener("dragstart", e => {
-    draggingCard = e.currentTarget;
+    // draggingList = e.currentTarget;
     list.classList.add("dragging");
   });
-
-  list.addEventListener("dragend", e => {
-    draggingCard = null;
+  list.addEventListener("dragend", () => {
+    updateList();
     list.classList.remove("dragging");
   });
 };
