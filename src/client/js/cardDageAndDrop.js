@@ -1,41 +1,43 @@
-const li = document.querySelector(".board-list");
-let dragged;
+let currentdrag;
+let target;
 
-li.addEventListener(
-  "dragstart",
-  function (event) {
-    console.log(event);
-    // store a ref. on the dragged elem
-    dragged = event.target;
-    // make it half transparent
-    event.target.style.opacity = 0.5;
-  },
-  false
-);
+export const drogandDrop = () => {
+  const lists = document.querySelectorAll(".board-list");
+  const ul = document.querySelector(".board-lists");
+  lists.forEach(list => {
+    console.log(list);
+    registerEventsOnList(list);
+    list.addEventListener("dragover", e => {
+      e.preventDefault();
+      let draggingCard = document.querySelector(".dragging");
+      ul.childNodes.forEach((lists, i) => {
+        if (lists === draggingCard) {
+          currentdrag = i;
+        }
+        if (lists === list) {
+          target = i;
+        }
+      });
+      console.log(currentdrag, target);
+      if (currentdrag > target) {
+        ul.insertBefore(draggingCard, list);
+      } else {
+        ul.insertBefore(list, draggingCard);
+      }
+    });
+  });
+};
 
-li.addEventListener(
-  "dragend",
-  function (event) {
-    // reset the transparency
-    event.target.style.opacity = "";
-  },
-  false
-);
+function registerEventsOnList(list) {
+  list.addEventListener("dragstart", e => {
+    console.log("dragstart");
+    list.classList.add("dragging");
+  });
 
-li.addEventListener(
-  "dragover",
-  function (event) {
-    // prevent default to allow drop
-    event.preventDefault();
-  },
-  false
-);
+  list.addEventListener("dragend", e => {
+    console.log("dragend");
+    list.classList.remove("dragging");
+  });
+}
 
-document.addEventListener(
-  "dragenter",
-  function (event) {
-    // highlight potential drop target when the draggable element enters it
-    console.log(event);
-  },
-  false
-);
+drogandDrop();

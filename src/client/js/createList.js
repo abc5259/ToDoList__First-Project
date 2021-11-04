@@ -1,3 +1,5 @@
+import { drogandDrop } from "./cardDageAndDrop";
+
 const board = document.querySelector("#board");
 const addListForm = document.querySelector(".board__addList-form");
 const addListInput = addListForm.querySelector("input");
@@ -6,6 +8,7 @@ const boardLists = document.querySelector(".board-lists");
 const addListFront = value => {
   const li = document.createElement("li");
   li.className = "board-list ";
+  li.draggable = true;
   li.innerHTML = `
     <div class="board-list__title">  
       <h3>${addListInput.value}</h3>
@@ -33,6 +36,7 @@ const handleSubmit = async e => {
   });
   if (response.status === 201) {
     addListFront(addListInput.value);
+    drogandDrop();
     addListInput.value = "";
   }
 };

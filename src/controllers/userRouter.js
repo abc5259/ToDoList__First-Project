@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import { async } from "regenerator-runtime";
 import User from "../models/User";
 
 //root
@@ -17,6 +16,7 @@ export const postJoin = async (req, res) => {
       errorMessage: "이미 존재하는 email입니다.",
     });
   }
+  //패스워드 틀리면 에러 메세지
   if (password !== password2) {
     return res.status(400).render("join", {
       pageTitle: "Join",
@@ -28,7 +28,6 @@ export const postJoin = async (req, res) => {
     name,
     password,
   });
-  console.log(req.session);
   return res.redirect("/login");
 };
 
