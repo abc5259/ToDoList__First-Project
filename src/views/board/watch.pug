@@ -7,7 +7,7 @@ block board
         h1=board.title 
       div.board__addList
         form.board__addList-form(method="POST")
-          input(type="text", placeholder="리스트의 제목을 입력하세요")  
+          input(type="text", required ,placeholder="리스트의 제목을 입력하세요")  
           div.board__addList-submit
             button Add list 
     section
@@ -18,13 +18,17 @@ block board
               h3=list.title
               i.fas.fa-ellipsis-h
             form.board-list__form
-              input(type="text", name="title", placeholder="카드의 제목 입력...")
+              input(type="text", required, name="title", placeholder="카드의 제목 입력...")
               button Add 
-            //- div.board-list__tasks 
-            //-   h6 card의 제목 
-            //-   i.fas.fa-edit
+            div.board-list__tasks 
+              //- div.board-list__task 
+              //-   h6 card의 제목 
+              //-   i.fas.fa-edit
+          
 block scripts 
   script(src="/static/js/createList.js") 
+  if board.lists.length > 0
+    script(src="/static/js/createCard.js") 
             
             
 

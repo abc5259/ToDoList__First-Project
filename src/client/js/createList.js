@@ -3,8 +3,10 @@ const addListForm = document.querySelector(".board__addList-form");
 const addListInput = addListForm.querySelector("input");
 const boardLists = document.querySelector(".board-lists");
 let lists;
+let cardForms;
 if (boardLists.childNodes) {
   lists = document.querySelectorAll(".board-list");
+  cardForms = document.querySelectorAll(".board-list__form");
 }
 
 let draggingList = null;
@@ -12,7 +14,6 @@ let currentdrag;
 let target;
 
 const updateList = async () => {
-  console.log(draggingList.querySelector("h3").innerText);
   const listTitle = draggingList.querySelector("h3").innerText;
   let currentIndex;
   boardLists.childNodes.forEach((lists, i) => {
@@ -20,7 +21,6 @@ const updateList = async () => {
       return (currentIndex = i);
     }
   });
-  console.log(currentIndex);
   await fetch(`/api/board/${board.dataset.id}/list/update`, {
     method: "POST",
     headers: {
@@ -55,18 +55,18 @@ const handleDragOver = list => {
 
 const registerEventsOnList = list => {
   list.addEventListener("dragstart", e => {
-    // draggingList = e.currentTarget;
     list.classList.add("dragging");
   });
   list.addEventListener("dragend", () => {
     updateList();
+    draggingList = null;
     list.classList.remove("dragging");
   });
 };
 
 const addListFront = value => {
   const li = document.createElement("li");
-  li.className = "board-list ";
+  li.className = "board-list";
   li.draggable = true;
   li.innerHTML = `
     <div class="board-list__title">  
@@ -77,10 +77,15 @@ const addListFront = value => {
       <input type="text" name="title" placeholder="카드의 제목 입력..." />
       <button>Add</button>
     </form>
+    <div class="board-list__tasks"></div>
   `;
   boardLists.appendChild(li);
+  //li에 drag and drop event 등록
   registerEventsOnList(li);
   handleDragOver(li);
+  //form에 submit event 등록
+  const cardForm = li.querySelector(".board-list__form");
+  registerEventsOnCard(cardForm);
 };
 
 const handleSubmit = async e => {
@@ -101,9 +106,24 @@ const handleSubmit = async e => {
   }
 };
 
+const handleSubmitCard = e => {
+  e.preventDefault();
+  const cardInput = e.currentTarget.querySelector("input");
+  console.log(cardInput.value);
+  cardInput.value = "";
+};
+
+const registerEventsOnCard = cardForm => {
+  cardForm.addEventListener("submit", handleSubmitCard);
+};
+
 lists.forEach(list => {
   registerEventsOnList(list);
   handleDragOver(list);
+});
+
+cardForms.forEach(cardForm => {
+  registerEventsOnCard(cardForm);
 });
 
 addListForm.addEventListener("submit", handleSubmit);
