@@ -46,6 +46,7 @@
     ul.board-lists {
       display: grid;
       grid-template-columns: repeat(4, 280px);
+      align-items: start;
       column-gap: 30px;
       li.board-list {
         padding: 5px 10px;

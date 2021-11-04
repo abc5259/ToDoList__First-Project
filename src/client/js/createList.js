@@ -77,7 +77,6 @@ const addListFront = value => {
       <input type="text" name="title" placeholder="카드의 제목 입력..." />
       <button>Add</button>
     </form>
-    <div class="board-list__tasks"></div>
   `;
   boardLists.appendChild(li);
   //li에 drag and drop event 등록
@@ -106,10 +105,22 @@ const handleSubmit = async e => {
   }
 };
 
+const paintCard = (cardTitle, form) => {
+  const taskMain = document.createElement("div");
+  taskMain.className = "board-list__tasks";
+  taskMain.innerHTML = `
+    <div class="board-list__task">
+      <h6>${cardTitle}</h6>
+      <i class="fas fa-edit"></i>
+    </div>
+  `;
+  form.parentNode.appendChild(taskMain);
+};
+
 const handleSubmitCard = e => {
   e.preventDefault();
   const cardInput = e.currentTarget.querySelector("input");
-  console.log(cardInput.value);
+  paintCard(cardInput.value, e.currentTarget);
   cardInput.value = "";
 };
 
