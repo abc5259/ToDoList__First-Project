@@ -46,7 +46,7 @@
     ul.board-lists {
       display: grid;
       grid-template-columns: repeat(4, 280px);
-      column-gap: 10px;
+      column-gap: 30px;
       li.board-list {
         padding: 5px 10px;
         border-radius: 5px;
