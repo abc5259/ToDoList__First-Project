@@ -37,6 +37,9 @@ const handleDragOver = list => {
   list.addEventListener("dragover", e => {
     e.preventDefault();
     draggingList = document.querySelector(".dragging");
+    if (!draggingList) {
+      return;
+    }
     boardLists.childNodes.forEach((lists, i) => {
       if (lists === draggingList) {
         currentdrag = i;
@@ -55,9 +58,13 @@ const handleDragOver = list => {
 
 const registerEventsOnList = list => {
   list.addEventListener("dragstart", e => {
+    console.log(e.target, e.currentTarget);
+    if (e.target !== e.currentTarget) {
+      return;
+    }
     list.classList.add("dragging");
   });
-  list.addEventListener("dragend", () => {
+  list.addEventListener("dragend", e => {
     updateList();
     draggingList = null;
     list.classList.remove("dragging");
@@ -108,6 +115,7 @@ const handleSubmit = async e => {
 const paintCard = (cardTitle, form) => {
   const taskMain = document.createElement("div");
   taskMain.className = "board-list__tasks";
+  taskMain.draggable = true;
   taskMain.innerHTML = `
     <div class="board-list__task">
       <h6>${cardTitle}</h6>
