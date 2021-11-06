@@ -4,9 +4,13 @@ const addListInput = addListForm.querySelector("input");
 const boardLists = document.querySelector(".board-lists");
 let lists;
 let cardForms;
+let cards;
 if (boardLists.childNodes) {
   lists = document.querySelectorAll(".board-list");
   cardForms = document.querySelectorAll(".board-list__form");
+}
+if (boardLists.childNodes.length > 2) {
+  cards = document.querySelectorAll(".board-list__tasks");
 }
 
 let draggingList = null;
@@ -58,13 +62,15 @@ const handleDragOver = list => {
 
 const registerEventsOnList = list => {
   list.addEventListener("dragstart", e => {
-    console.log(e.target, e.currentTarget);
     if (e.target !== e.currentTarget) {
       return;
     }
     list.classList.add("dragging");
   });
   list.addEventListener("dragend", e => {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
     updateList();
     draggingList = null;
     list.classList.remove("dragging");
@@ -113,16 +119,14 @@ const handleSubmit = async e => {
 };
 
 const paintCard = (cardTitle, form) => {
-  const taskMain = document.createElement("div");
-  taskMain.className = "board-list__tasks";
-  taskMain.draggable = true;
-  taskMain.innerHTML = `
-    <div class="board-list__task">
+  const card = document.createElement("div");
+  card.className = "board-list__task";
+  card.draggable = true;
+  card.innerHTML = `
       <h6>${cardTitle}</h6>
       <i class="fas fa-edit"></i>
-    </div>
   `;
-  form.parentNode.appendChild(taskMain);
+  form.parentNode.childNodes[2].appendChild(card);
 };
 
 const handleSubmitCard = e => {
@@ -144,5 +148,7 @@ lists.forEach(list => {
 cardForms.forEach(cardForm => {
   registerEventsOnCard(cardForm);
 });
+
+cards.forEach(card => {});
 
 addListForm.addEventListener("submit", handleSubmit);
