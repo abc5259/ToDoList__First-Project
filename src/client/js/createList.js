@@ -164,11 +164,28 @@ const handleCloseList = e => {
   e.currentTarget.parentNode.parentNode.classList.remove("isShow");
 };
 
+const handleDeleteList = async e => {
+  const list = e.currentTarget.parentNode.parentNode.parentNode.parentNode;
+  const id = board.dataset.id;
+  await fetch(`/api/board/${id}/list/delete`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      listId: list.dataset.id,
+    }),
+  });
+  list.remove();
+};
+
 const handleMoreList = e => {
   const popOver = e.currentTarget.nextElementSibling;
   popOver.classList.add("isShow");
   const closeBtn = popOver.querySelector(".fas.fa-times");
   closeBtn.addEventListener("click", handleCloseList);
+  const deleteList = popOver.querySelector(".deleteList");
+  deleteList.addEventListener("click", handleDeleteList);
 };
 
 const registerEventsOnMoreList = moreList => {

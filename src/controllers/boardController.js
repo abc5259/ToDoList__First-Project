@@ -78,3 +78,18 @@ export const updateList = async (req, res) => {
   await board.save();
   return res.sendStatus(201);
 };
+
+export const deleteList = async (req, res) => {
+  const {
+    params: { id },
+    body: { listId },
+  } = req;
+  const board = await Board.findById(id);
+  if (!board) {
+    return res.sendStatus(404);
+  }
+  await List.findByIdAndDelete(id);
+  board.lists.splice(board.lists.indexOf(listId), 1);
+  await board.save();
+  return res.sendStatus(200);
+};

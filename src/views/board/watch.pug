@@ -13,7 +13,7 @@ block board
     section
       ul.board-lists
         each list in board.lists
-          li.board-list(draggable="true")
+          li.board-list(draggable="true", data-id=list._id)
             div.board-list__title 
               h3=list.title
               i.fas.fa-ellipsis-h.moreList
