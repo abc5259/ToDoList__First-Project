@@ -144,9 +144,15 @@ const registerEventsOnCard = cardForm => {
   cardForm.addEventListener("submit", handleSubmitCard);
 };
 
+const handleCloseList = e => {
+  e.currentTarget.parentNode.parentNode.classList.remove("isShow");
+};
+
 const handleMoreList = e => {
   const popOver = e.currentTarget.nextElementSibling;
   popOver.classList.add("isShow");
+  const closeBtn = popOver.querySelector(".fas.fa-times");
+  closeBtn.addEventListener("click", handleCloseList);
 };
 
 const registerEventsOnMoreList = moreList => {
