@@ -16,7 +16,16 @@ block board
           li.board-list(draggable="true")
             div.board-list__title 
               h3=list.title
-              i.fas.fa-ellipsis-h
+              i.fas.fa-ellipsis-h.moreList
+              div.pop__over 
+                div.pop__over__header 
+                  span List actions 
+                  i.fas.fa-times
+                div.pop__over__main 
+                  div.deleteList 
+                    span Delete List 
+                  div.editList 
+                    spna Edit List Title
             form.board-list__form
               input(type="text", required, name="title", placeholder="카드의 제목 입력...")
               button Add 

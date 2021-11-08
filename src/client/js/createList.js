@@ -3,10 +3,12 @@ const addListForm = document.querySelector(".board__addList-form");
 const addListInput = addListForm.querySelector("input");
 const boardLists = document.querySelector(".board-lists");
 let lists;
+let moreLists;
 let cardForms;
 let cards;
 if (boardLists.childNodes) {
   lists = document.querySelectorAll(".board-list");
+  moreLists = document.querySelectorAll(".moreList");
   cardForms = document.querySelectorAll(".board-list__form");
 }
 if (boardLists.childNodes.length > 2) {
@@ -62,12 +64,14 @@ const handleDragOver = list => {
 
 const registerEventsOnList = list => {
   list.addEventListener("dragstart", e => {
+    //drag하는게 list가 아닌경우 리턴
     if (e.target !== e.currentTarget) {
       return;
     }
     list.classList.add("dragging");
   });
   list.addEventListener("dragend", e => {
+    //drag하는게 list가 아닌경우 리턴
     if (e.target !== e.currentTarget) {
       return;
     }
@@ -140,9 +144,22 @@ const registerEventsOnCard = cardForm => {
   cardForm.addEventListener("submit", handleSubmitCard);
 };
 
+const handleMoreList = e => {
+  const popOver = e.currentTarget.nextElementSibling;
+  popOver.classList.add("isShow");
+};
+
+const registerEventsOnMoreList = moreList => {
+  moreList.addEventListener("click", handleMoreList);
+};
+
 lists.forEach(list => {
   registerEventsOnList(list);
   handleDragOver(list);
+});
+
+moreLists.forEach(moreList => {
+  registerEventsOnMoreList(moreList);
 });
 
 cardForms.forEach(cardForm => {

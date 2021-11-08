@@ -53,6 +53,7 @@
         border-radius: 5px;
         background-color: #ebecf0;
         .board-list__title {
+          position: relative;
           font-size: 1.1rem;
           font-weight: 600;
           display: flex;
@@ -126,4 +127,45 @@
 
 .dragging {
   opacity: 0.4;
+}
+
+.pop__over {
+  position: absolute;
+  top: -30px;
+  right: -15rem;
+  z-index: 1;
+  display: none;
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  .pop__over__header {
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    grid-template-areas: ". title delete";
+    align-items: center;
+    border-bottom: 1px solid #dfe2e7;
+    span {
+      grid-area: title;
+      text-align: center;
+    }
+    i {
+      grid-area: delete;
+    }
+  }
+  .pop__over__main {
+    padding: 15px 10px;
+    line-height: 2;
+    div {
+      cursor: pointer;
+      &:hover {
+        background-color: #f5f6f8;
+      }
+    }
+  }
+}
+
+.isShow {
+  display: block;
 }
