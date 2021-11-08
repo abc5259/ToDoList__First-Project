@@ -88,7 +88,21 @@ const addListFront = value => {
   li.innerHTML = `
     <div class="board-list__title">  
       <h3>${value}</h3>
-      <i class="fas fa-ellipsis-h"></i>
+      <i class="fas fa-ellipsis-h moreList"></i>
+      <div class="pop__over">
+          <div class="pop__over__header">
+            <span>List actions</span>
+            <i class="fas fa-times"></i>
+          </div>
+          <div class="pop__over__main">
+              <div class="deleteList">
+                <span>Delete List</span>
+              </div>
+              <div class="editList">
+                <span>Edit List Title</span>
+              </div>
+          </div>
+      </div>
     </div>
     <form class="board-list__form" method="POST">
       <input type="text" name="title" placeholder="카드의 제목 입력..." />
@@ -102,6 +116,8 @@ const addListFront = value => {
   //form에 submit event 등록
   const cardForm = li.querySelector(".board-list__form");
   registerEventsOnCard(cardForm);
+  const moreList = li.querySelector(".moreList");
+  registerEventsOnMoreList(moreList);
 };
 
 const handleSubmit = async e => {
@@ -172,6 +188,6 @@ cardForms.forEach(cardForm => {
   registerEventsOnCard(cardForm);
 });
 
-cards.forEach(card => {});
+// cards.forEach(card => {});
 
 addListForm.addEventListener("submit", handleSubmit);
