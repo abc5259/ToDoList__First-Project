@@ -28,7 +28,7 @@
 }
 .boards__all {
   display: grid;
-  grid-template-columns: repeat(6, 200px);
+  grid-template-columns: repeat(auto-fill, 200px);
   gap: 20px;
   a {
     text-decoration: none;
@@ -43,33 +43,5 @@
     &:hover {
       opacity: 0.5;
     }
-  }
-}
-
-@media (max-width: 1200px) {
-  .boards__all {
-    grid-template-columns: repeat(4, 200px);
-  }
-}
-@media (max-width: 1000px) {
-  .boards__all {
-    display: grid;
-    grid-template-columns: repeat(3, 200px);
-  }
-}
-@media (max-width: 800px) {
-  .boards__all {
-    display: grid;
-    grid-template-columns: repeat(2, 200px);
-  }
-}
-
-@media (max-width: 500px) {
-  .boards {
-    margin: 50px 5px 0;
-  }
-  .boards__all {
-    display: grid;
-    grid-template-columns: repeat(2, 140px);
   }
 }
