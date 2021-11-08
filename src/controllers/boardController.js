@@ -60,7 +60,7 @@ export const createList = async (req, res) => {
   board.lists.push(list._id);
   await board.save();
   console.log(board, list);
-  return res.sendStatus(201);
+  return res.status(201).json({ listId: list._id });
 };
 
 export const updateList = async (req, res) => {

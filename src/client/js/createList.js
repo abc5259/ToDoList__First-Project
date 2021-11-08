@@ -81,8 +81,9 @@ const registerEventsOnList = list => {
   });
 };
 
-const addListFront = value => {
+const addListFront = (value, id) => {
   const li = document.createElement("li");
+  li.dataset.id = id;
   li.className = "board-list";
   li.draggable = true;
   li.innerHTML = `
@@ -132,8 +133,9 @@ const handleSubmit = async e => {
       title: addListInput.value,
     }),
   });
+  const json = await response.json();
   if (response.status === 201) {
-    addListFront(addListInput.value);
+    addListFront(addListInput.value, json.listId);
     addListInput.value = "";
   }
 };
