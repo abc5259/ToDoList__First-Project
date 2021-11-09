@@ -132,7 +132,7 @@
 .pop__over {
   position: absolute;
   top: -30px;
-  right: -15rem;
+  right: -10rem;
   z-index: 1;
   display: none;
   width: 300px;
@@ -168,4 +168,8 @@
 
 .isShow {
   display: block;
+}
+
+.hidden {
+  display: none;
 }

@@ -87,7 +87,9 @@ const addListFront = (value, id) => {
   li.className = "board-list";
   li.draggable = true;
   li.innerHTML = `
-    <div class="board-list__title">  
+    <div class="board-list__title"> 
+      <input value=${value} class="hidden" />
+      <button class="hidden">edit</button> 
       <h3>${value}</h3>
       <i class="fas fa-ellipsis-h moreList"></i>
       <div class="pop__over">
@@ -168,12 +170,11 @@ const registerEventsOnCard = cardForm => {
   cardForm.addEventListener("submit", handleSubmitCard);
 };
 
-const handleCloseList = e => {
-  e.currentTarget.parentNode.parentNode.classList.remove("isShow");
+const handleCloseList = popOver => {
+  popOver.classList.remove("isShow");
 };
 
-const handleDeleteList = async e => {
-  const list = e.currentTarget.parentNode.parentNode.parentNode.parentNode;
+const handleDeleteList = async list => {
   const id = board.dataset.id;
   await fetch(`/api/board/${id}/list/delete`, {
     method: "DELETE",
@@ -187,13 +188,53 @@ const handleDeleteList = async e => {
   list.remove();
 };
 
+const handlEditBtn = async (input, btn, h3) => {
+  const { value: title } = input;
+  const list = input.parentNode.parentNode;
+  const { id } = list.dataset;
+  console.log(id);
+  // const response = await fetch(`/api/list/${id}/edit`, {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     title: input.value,
+  //   }),
+  // });
+  input.classList.add("hidden");
+  btn.classList.add("hidden");
+  h3.innerText = input.value;
+  h3.classList.remove("hidden");
+};
+
+const handleEditList = list => {
+  const { children } = list;
+  const input = children[0];
+  const btn = children[1];
+  const h3 = children[2];
+  const popOver = children[4];
+  input.classList.remove("hidden");
+  btn.classList.remove("hidden");
+  h3.classList.add("hidden");
+  popOver.classList.remove("isShow");
+  btn.addEventListener("click", e => handlEditBtn(input, btn, h3));
+};
+
 const handleMoreList = e => {
   const popOver = e.currentTarget.nextElementSibling;
   popOver.classList.add("isShow");
+  // close btn event
   const closeBtn = popOver.querySelector(".fas.fa-times");
-  closeBtn.addEventListener("click", handleCloseList);
+  closeBtn.addEventListener("click", e => handleCloseList(popOver));
+  // delete list event
   const deleteList = popOver.querySelector(".deleteList");
-  deleteList.addEventListener("click", handleDeleteList);
+  deleteList.addEventListener("click", e =>
+    handleDeleteList(popOver.parentNode.parentNode)
+  );
+  // edit list event
+  const editList = popOver.querySelector(".editList");
+  editList.addEventListener("click", e => handleEditList(popOver.parentNode));
 };
 
 const registerEventsOnMoreList = moreList => {

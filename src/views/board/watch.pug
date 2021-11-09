@@ -15,6 +15,8 @@ block board
         each list in board.lists
           li.board-list(draggable="true", data-id=list._id)
             div.board-list__title 
+              input(value=list.title class="hidden")
+              button(class="hidden") edit
               h3=list.title
               i.fas.fa-ellipsis-h.moreList
               div.pop__over 
