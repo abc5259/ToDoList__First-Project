@@ -193,19 +193,21 @@ const handlEditBtn = async (input, btn, h3) => {
   const list = input.parentNode.parentNode;
   const { id } = list.dataset;
   console.log(id);
-  // const response = await fetch(`/api/list/${id}/edit`, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     title: input.value,
-  //   }),
-  // });
-  input.classList.add("hidden");
-  btn.classList.add("hidden");
-  h3.innerText = input.value;
-  h3.classList.remove("hidden");
+  const response = await fetch(`/api/list/${id}/edit`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: input.value,
+    }),
+  });
+  if (response.status === 201) {
+    input.classList.add("hidden");
+    btn.classList.add("hidden");
+    h3.innerText = title;
+    h3.classList.remove("hidden");
+  }
 };
 
 const handleEditList = list => {

@@ -79,6 +79,18 @@ export const updateList = async (req, res) => {
   return res.sendStatus(201);
 };
 
+export const editList = async (req, res) => {
+  const {
+    params: { id },
+    body: { title },
+  } = req;
+  console.log(id, title);
+  await List.findByIdAndUpdate(id, {
+    title,
+  });
+  return res.sendStatus(201);
+};
+
 export const deleteList = async (req, res) => {
   const {
     params: { id },
