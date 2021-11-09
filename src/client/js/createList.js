@@ -88,8 +88,8 @@ const addListFront = (value, id) => {
   li.draggable = true;
   li.innerHTML = `
     <div class="board-list__title"> 
-      <input value=${value} class="hidden" />
-      <button class="hidden">edit</button> 
+      <input value=${value} class="hidden editInput" />
+      <button class="hidden editBtn">edit</button> 
       <h3>${value}</h3>
       <i class="fas fa-ellipsis-h moreList"></i>
       <div class="pop__over">

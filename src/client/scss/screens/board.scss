@@ -173,3 +173,19 @@
 .hidden {
   display: none;
 }
+
+.editInput {
+  max-width: 167px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+.editBtn {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #036aa7;
+  color: #ffffff;
+  cursor: pointer;
+}
