@@ -4,12 +4,12 @@ const addListInput = addListForm.querySelector("input");
 const boardLists = document.querySelector(".board-lists");
 let lists;
 let moreLists;
-let cardForms;
-let cards = document.querySelectorAll(".board-list__tasks");
+let taskForms;
+const tasks = document.querySelectorAll(".board-list__task");
 if (boardLists.childNodes) {
   lists = document.querySelectorAll(".board-list");
   moreLists = document.querySelectorAll(".moreList");
-  cardForms = document.querySelectorAll(".board-list__form");
+  taskForms = document.querySelectorAll(".board-list__form");
 }
 let draggingList = null;
 let currentdrag;
@@ -115,8 +115,8 @@ const addListFront = (value, id) => {
   registerEventsOnList(li);
   handleDragOver(li);
   //form에 submit event 등록
-  const cardForm = li.querySelector(".board-list__form");
-  registerEventsOnCard(cardForm);
+  const taskForm = li.querySelector(".board-list__form");
+  registerEventsOnTaskForm(taskForm);
   const moreList = li.querySelector(".moreList");
   registerEventsOnMoreList(moreList);
 };
@@ -140,8 +140,8 @@ const handleSubmit = async e => {
   }
 };
 
-const paintCard = async (cardTitle, form) => {
-  if (cardTitle === "") {
+const paintTask = async (taskTitle, form) => {
+  if (taskTitle === "") {
     return;
   }
   const list = form.parentNode;
@@ -152,28 +152,28 @@ const paintCard = async (cardTitle, form) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      title: cardTitle,
+      title: taskTitle,
     }),
   });
-  const card = document.createElement("div");
-  card.className = "board-list__task";
-  card.draggable = true;
-  card.innerHTML = `
-      <h6>${cardTitle}</h6>
+  const task = document.createElement("div");
+  task.className = "board-list__task";
+  task.draggable = true;
+  task.innerHTML = `
+      <h6>${taskTitle}</h6>
       <i class="fas fa-edit"></i>
   `;
-  list.children[2].appendChild(card);
+  list.children[2].appendChild(task);
 };
 
-const handleSubmitCard = e => {
+const handleSubmitTask = e => {
   e.preventDefault();
-  const cardInput = e.currentTarget.querySelector("input");
-  paintCard(cardInput.value, e.currentTarget);
-  cardInput.value = "";
+  const input = e.currentTarget.querySelector("input");
+  paintTask(input.value, e.currentTarget);
+  input.value = "";
 };
 
-const registerEventsOnCard = cardForm => {
-  cardForm.addEventListener("submit", handleSubmitCard);
+const registerEventsOnTaskForm = taskForm => {
+  taskForm.addEventListener("submit", handleSubmitTask);
 };
 
 const handleCloseList = popOver => {
@@ -249,6 +249,15 @@ const registerEventsOnMoreList = moreList => {
   moreList.addEventListener("click", handleMoreList);
 };
 
+const handleClickTask = e => {
+  const task = e.currentTarget;
+  console.log(task);
+};
+
+const registerEventsOnTask = task => {
+  task.addEventListener("click", handleClickTask);
+};
+
 lists.forEach(list => {
   registerEventsOnList(list);
   handleDragOver(list);
@@ -258,10 +267,12 @@ moreLists.forEach(moreList => {
   registerEventsOnMoreList(moreList);
 });
 
-cardForms.forEach(cardForm => {
-  registerEventsOnCard(cardForm);
+taskForms.forEach(taskForm => {
+  registerEventsOnTaskForm(taskForm);
 });
 
-// cards.forEach(card => {});
+tasks.forEach(task => {
+  registerEventsOnTask(task);
+});
 
 addListForm.addEventListener("submit", handleSubmit);

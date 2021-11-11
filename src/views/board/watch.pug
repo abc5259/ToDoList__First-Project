@@ -33,7 +33,7 @@ block board
               button Add 
             div.board-list__tasks 
               each task in list.tasks
-                div.board-list__task 
+                div.board-list__task(draggable="true")
                   h6=task.title
                   i.fas.fa-edit
           
