@@ -1,6 +1,20 @@
 extends ../base
 
 block board 
+  div.task__modal 
+    div.task__modal__header 
+      h4 task Title 
+      i.fas.fa-times
+    div.task__modal__info 
+      div.task__modal__description 
+        div.task__modal__description__title 
+          i.fas.fa-align-left 
+          h6 Description 
+        div.task__modal__description__content 
+          textarea(placeholder="자세한 설명 추가...")
+        div.task__modal__description__button 
+          button Save 
+          i.fas.fa-times
   main(style=`background-color: ${board.backgroundColor}`, data-id=board._id)#board
     div.board__header
       div.board__title 
@@ -36,6 +50,9 @@ block board
                 div.board-list__task(draggable="true")
                   h6=task.title
                   i.fas.fa-edit
+
+
+
           
 block scripts 
   script(src="/static/js/createList.js") 
