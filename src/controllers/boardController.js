@@ -1,7 +1,7 @@
 //root
-import { async } from "regenerator-runtime";
 import Board from "../models/Board";
 import List from "../models/List";
+import Task from "../models/Task";
 import User from "../models/User";
 
 export const home = async (req, res) => {
@@ -15,13 +15,23 @@ export const home = async (req, res) => {
 
 export const watch = async (req, res) => {
   const { id } = req.params;
-  const board = await Board.findById(id).populate("lists");
+  const board = await Board.findById(id).populate({
+    path: "lists",
+    populate: {
+      path: "tasks",
+      model: "Task",
+    },
+  });
+  console.log(board.lists[0].tasks);
   if (!board) {
     return res
       .statue(404)
       .render("board/watch", { pageTitle: "Board Not Found" });
   }
-  res.render("board/watch", { pageTitle: "Board Watch", board });
+  res.render("board/watch", {
+    pageTitle: "Board Watch",
+    board,
+  });
 };
 
 //api
@@ -104,4 +114,30 @@ export const deleteList = async (req, res) => {
   board.lists.splice(board.lists.indexOf(listId), 1);
   await board.save();
   return res.sendStatus(200);
+};
+
+// Task
+
+export const createTask = async (req, res) => {
+  const {
+    params: { id },
+    body: { title },
+  } = req;
+  console.log(id, title);
+  const list = await List.findById(id);
+  if (!list) {
+    return res.sendStatus(404);
+  }
+  const task = await Task.create({
+    title,
+    list: list.id,
+    description: "",
+  });
+  if (!task) {
+    return res.sendStatus(404);
+  }
+  list.tasks.push(task.id);
+  await list.save();
+  console.log(list);
+  return res.sendStatus(201);
 };

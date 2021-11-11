@@ -5,16 +5,12 @@ const boardLists = document.querySelector(".board-lists");
 let lists;
 let moreLists;
 let cardForms;
-let cards;
+let cards = document.querySelectorAll(".board-list__tasks");
 if (boardLists.childNodes) {
   lists = document.querySelectorAll(".board-list");
   moreLists = document.querySelectorAll(".moreList");
   cardForms = document.querySelectorAll(".board-list__form");
 }
-if (boardLists.childNodes.length > 2) {
-  cards = document.querySelectorAll(".board-list__tasks");
-}
-
 let draggingList = null;
 let currentdrag;
 let target;
@@ -144,10 +140,21 @@ const handleSubmit = async e => {
   }
 };
 
-const paintCard = (cardTitle, form) => {
+const paintCard = async (cardTitle, form) => {
   if (cardTitle === "") {
     return;
   }
+  const list = form.parentNode;
+  const { id } = list.dataset;
+  await fetch(`/api/list/${id}/task/create`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: cardTitle,
+    }),
+  });
   const card = document.createElement("div");
   card.className = "board-list__task";
   card.draggable = true;
@@ -155,8 +162,7 @@ const paintCard = (cardTitle, form) => {
       <h6>${cardTitle}</h6>
       <i class="fas fa-edit"></i>
   `;
-  console.dir(form.parentNode);
-  form.parentNode.children[2].appendChild(card);
+  list.children[2].appendChild(card);
 };
 
 const handleSubmitCard = e => {

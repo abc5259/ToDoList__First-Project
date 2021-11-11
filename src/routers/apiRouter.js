@@ -2,6 +2,7 @@ import express from "express";
 import {
   createBoard,
   createList,
+  createTask,
   deleteList,
   editList,
   updateList,
@@ -14,5 +15,6 @@ apiRouter.post("/board/:id/list/create", createList);
 apiRouter.post("/board/:id/list/update", updateList);
 apiRouter.post("/list/:id/edit", editList);
 apiRouter.delete("/board/:id/list/delete", deleteList);
+apiRouter.post("/list/:id/task/create", createTask);
 
 export default apiRouter;
