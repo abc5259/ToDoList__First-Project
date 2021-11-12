@@ -5,11 +5,13 @@ const boardLists = document.querySelector(".board-lists");
 let lists;
 let moreLists;
 let taskForms;
-const tasks = document.querySelectorAll(".board-list__task");
+let tasksWrappers;
+let tasks;
 if (boardLists.childNodes) {
   lists = document.querySelectorAll(".board-list");
   moreLists = document.querySelectorAll(".moreList");
   taskForms = document.querySelectorAll(".board-list__form");
+  tasksWrappers = document.querySelectorAll(".board-list__tasks");
 }
 let draggingList = null;
 let currentdrag;
@@ -146,7 +148,7 @@ const paintTask = async (taskTitle, form) => {
   }
   const list = form.parentNode;
   const { id } = list.dataset;
-  await fetch(`/api/list/${id}/task/create`, {
+  const response = await fetch(`/api/list/${id}/task/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -155,14 +157,21 @@ const paintTask = async (taskTitle, form) => {
       title: taskTitle,
     }),
   });
-  const task = document.createElement("div");
-  task.className = "board-list__task";
-  task.draggable = true;
-  task.innerHTML = `
+  const json = await response.json();
+  console.log(json);
+  if (response.status === 201) {
+    const { taskId } = json;
+    const task = document.createElement("div");
+    task.dataset.id = taskId;
+    task.className = "board-list__task";
+    task.draggable = true;
+    task.innerHTML = `
       <h6>${taskTitle}</h6>
       <i class="fas fa-edit"></i>
   `;
-  list.children[2].appendChild(task);
+    list.children[2].appendChild(task);
+    registerEventsOnTask(task);
+  }
 };
 
 const handleSubmitTask = e => {
@@ -249,13 +258,27 @@ const registerEventsOnMoreList = moreList => {
   moreList.addEventListener("click", handleMoreList);
 };
 
+const handleTaskModal = e => {
+  if (e.target.classList.contains("show")) {
+    e.target.classList.remove("show");
+  }
+};
+
+const closeTaskModal = modal => {
+  modal.classList.remove("show");
+};
+
 const handleClickTask = e => {
   const task = e.currentTarget;
   const title = task.children[0].innerText;
   const taskModal = document.querySelector(".task__modal");
+  const modal = taskModal.parentNode;
   const taskTitle = taskModal.querySelector(".task__modal__header-title h4");
+  const modalCloseBtn = taskModal.querySelector(".task__modal__close");
   taskTitle.innerText = title;
-  taskModal.parentNode.classList.add("show");
+  modal.classList.add("show");
+  modal.addEventListener("click", handleTaskModal);
+  modalCloseBtn.addEventListener("click", e => closeTaskModal(modal));
 };
 
 const registerEventsOnTask = task => {
@@ -275,8 +298,13 @@ taskForms.forEach(taskForm => {
   registerEventsOnTaskForm(taskForm);
 });
 
-tasks.forEach(task => {
-  registerEventsOnTask(task);
+tasksWrappers.forEach(tasksWrapper => {
+  if (tasksWrapper.childNodes) {
+    tasks = document.querySelectorAll(".board-list__task");
+    tasks.forEach(task => {
+      registerEventsOnTask(task);
+    });
+  }
 });
 
 addListForm.addEventListener("submit", handleSubmit);

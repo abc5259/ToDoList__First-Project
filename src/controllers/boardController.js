@@ -22,7 +22,6 @@ export const watch = async (req, res) => {
       model: "Task",
     },
   });
-  console.log(board.lists[0].tasks);
   if (!board) {
     return res
       .statue(404)
@@ -139,5 +138,5 @@ export const createTask = async (req, res) => {
   list.tasks.push(task.id);
   await list.save();
   console.log(list);
-  return res.sendStatus(201);
+  return res.status(201).json({ taskId: task.id });
 };
