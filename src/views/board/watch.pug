@@ -1,23 +1,26 @@
 extends ../base
 
 block board 
-  div.task__modal 
-    div.task__modal__header 
-      div.task__modal__header-title
-        i.fas.fa-tv
-        h4 task Title 
-        input.hidden.taskTitleInput(name="title") 
-      div.task__modal__close
-        i.fas.fa-times
-    div.task__modal__info 
-      div.task__modal__description 
-        div.task__modal__description__title 
-          i.fas.fa-align-left 
-          h6 Description 
-        div.task__modal__description__content 
-          textarea(placeholder="자세한 설명 추가...", rows="5")
-        div.task__modal__description__button 
-          button Save 
+  div.modal
+    div.task__modal
+      div.task__modal__header 
+        div.task__modal__header-title
+          i.fas.fa-tv
+          h4 task Title 
+          input.hidden.taskTitleInput(name="title") 
+        div.task__modal__close
+          i.fas.fa-times
+      div.task__modal__info 
+        div.task__modal__description 
+          div.task__modal__description__title 
+            i.fas.fa-align-left 
+            h6 Description 
+          div.task__modal__description__content 
+            textarea(placeholder="자세한 설명 추가...", rows="5")
+          div.task__modal__description__button 
+            button Save 
+        div.deleteTask 
+          button Delete Task
   main(style=`background-color: ${board.backgroundColor}`, data-id=board._id)#board
     div.board__header
       div.board__title 

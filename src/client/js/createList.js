@@ -251,7 +251,11 @@ const registerEventsOnMoreList = moreList => {
 
 const handleClickTask = e => {
   const task = e.currentTarget;
-  console.log(task);
+  const title = task.children[0].innerText;
+  const taskModal = document.querySelector(".task__modal");
+  const taskTitle = taskModal.querySelector(".task__modal__header-title h4");
+  taskTitle.innerText = title;
+  taskModal.parentNode.classList.add("show");
 };
 
 const registerEventsOnTask = task => {
