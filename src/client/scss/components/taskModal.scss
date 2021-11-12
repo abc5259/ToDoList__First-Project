@@ -3,12 +3,84 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60%;
+  width: 50%;
   background-color: #f4f5f7;
   padding: 20px;
-}
-
-.task__modal__header {
-  display: flex;
-  justify-content: space-between;
+  border-radius: 5px;
+  .task__modal__header {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    .task__modal__header-title {
+      display: flex;
+      align-items: center;
+      i {
+        margin-right: 20px;
+      }
+      h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+      .taskTitleInput {
+        font-size: 1.5rem;
+        padding: 5px 10px;
+      }
+    }
+    .task__modal__close {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:hover {
+        background-color: #e2e4e9;
+      }
+    }
+  }
+  .task__modal__info {
+    .task__modal__description {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      grid-template-rows: 30px 1fr 50px;
+      grid-template-areas:
+        "title title"
+        ". content"
+        ". button";
+      .task__modal__description__title {
+        grid-area: title;
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        i {
+          margin-right: 20px;
+        }
+        h6 {
+          font-size: 1.2rem;
+        }
+      }
+      .task__modal__description__content {
+        grid-area: content;
+        margin-bottom: 10px;
+        textarea {
+          border: none;
+          width: 60%;
+          padding: 10px;
+          font-size: 1.2rem;
+          resize: none;
+        }
+      }
+      .task__modal__description__button {
+        grid-area: button;
+        button {
+          color: #ffffff;
+          background-color: #036aa7;
+          border: none;
+          padding: 10px 15px;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
 }
