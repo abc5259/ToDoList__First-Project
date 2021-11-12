@@ -4,6 +4,7 @@ import {
   createList,
   createTask,
   deleteList,
+  deleteTask,
   editList,
   updateList,
   watchTask,
@@ -23,5 +24,6 @@ apiRouter.delete("/board/:id/list/delete", deleteList);
 // Task
 apiRouter.post("/list/:id/task/create", createTask);
 apiRouter.post("/task/:id", watchTask);
+apiRouter.delete("/list/:id/task/delete", deleteTask);
 
 export default apiRouter;

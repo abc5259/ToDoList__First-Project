@@ -268,6 +268,19 @@ const closeTaskModal = modal => {
   modal.classList.remove("show");
 };
 
+const handleDeleteTask = async (listId, taskId) => {
+  console.log(listId, taskId);
+  await fetch(`/api/list/${listId}/task/delete`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.parse({
+      taskId,
+    }),
+  });
+};
+
 const handleClickTask = async e => {
   const task = e.currentTarget;
   const { id } = task.dataset;
@@ -279,21 +292,23 @@ const handleClickTask = async e => {
   });
   const json = await response.json();
   if (response.status === 201) {
-    const { title, description } = json;
+    const { title, description, list: listId, _id: taskId } = json.task;
     const taskModal = document.querySelector(".task__modal");
     const modal = taskModal.parentNode;
     const taskTitle = taskModal.querySelector(".task__modal__header-title h4");
     const taskDescription = taskModal.querySelector(
       ".task__modal__description__content textarea"
     );
-    const modalCloseBtn = taskModal.querySelector(".task__modal__close");
     taskTitle.innerText = title;
     if (!description === "") {
       taskDescription.value = description;
     }
     modal.classList.add("show");
     modal.addEventListener("click", handleTaskModal);
+    const modalCloseBtn = taskModal.querySelector(".task__modal__close");
     modalCloseBtn.addEventListener("click", e => closeTaskModal(modal));
+    const deleteTask = taskModal.querySelector(".deleteTask");
+    deleteTask.addEventListener("click", e => handleDeleteTask(listId, taskId));
   }
 };
 

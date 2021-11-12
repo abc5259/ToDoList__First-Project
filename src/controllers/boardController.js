@@ -148,6 +148,14 @@ export const watchTask = async (req, res) => {
     return res.sendStatus(404);
   }
   console.log(task);
-  const { title, description } = task;
-  return res.status(201).json({ title, description });
+  return res.status(201).json({ task });
+};
+
+export const deleteTask = (req, res) => {
+  const {
+    params: { id: listId },
+    body: { taskId },
+  } = req;
+  console.log(listId, taskId);
+  return res.sendStatus(201);
 };
