@@ -73,6 +73,7 @@
       .task__modal__description__button {
         grid-area: button;
         button {
+          cursor: pointer;
           color: #ffffff;
           background-color: #036aa7;
           border: none;
@@ -84,6 +85,7 @@
     .deleteTask {
       text-align: center;
       button {
+        cursor: pointer;
         color: #ffffff;
         background-color: red;
         border: none;

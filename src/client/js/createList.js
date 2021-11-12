@@ -268,17 +268,33 @@ const closeTaskModal = modal => {
   modal.classList.remove("show");
 };
 
-const handleClickTask = e => {
+const handleClickTask = async e => {
   const task = e.currentTarget;
-  const title = task.children[0].innerText;
-  const taskModal = document.querySelector(".task__modal");
-  const modal = taskModal.parentNode;
-  const taskTitle = taskModal.querySelector(".task__modal__header-title h4");
-  const modalCloseBtn = taskModal.querySelector(".task__modal__close");
-  taskTitle.innerText = title;
-  modal.classList.add("show");
-  modal.addEventListener("click", handleTaskModal);
-  modalCloseBtn.addEventListener("click", e => closeTaskModal(modal));
+  const { id } = task.dataset;
+  const response = await fetch(`/api/task/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const json = await response.json();
+  if (response.status === 201) {
+    const { title, description } = json;
+    const taskModal = document.querySelector(".task__modal");
+    const modal = taskModal.parentNode;
+    const taskTitle = taskModal.querySelector(".task__modal__header-title h4");
+    const taskDescription = taskModal.querySelector(
+      ".task__modal__description__content textarea"
+    );
+    const modalCloseBtn = taskModal.querySelector(".task__modal__close");
+    taskTitle.innerText = title;
+    if (!description === "") {
+      taskDescription.value = description;
+    }
+    modal.classList.add("show");
+    modal.addEventListener("click", handleTaskModal);
+    modalCloseBtn.addEventListener("click", e => closeTaskModal(modal));
+  }
 };
 
 const registerEventsOnTask = task => {

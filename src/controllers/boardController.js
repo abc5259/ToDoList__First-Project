@@ -140,3 +140,14 @@ export const createTask = async (req, res) => {
   console.log(list);
   return res.status(201).json({ taskId: task.id });
 };
+
+export const watchTask = async (req, res) => {
+  const { id } = req.params;
+  const task = await Task.findById(id);
+  if (!task) {
+    return res.sendStatus(404);
+  }
+  console.log(task);
+  const { title, description } = task;
+  return res.status(201).json({ title, description });
+};
