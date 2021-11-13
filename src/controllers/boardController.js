@@ -148,6 +148,17 @@ export const watchTask = async (req, res) => {
   return res.status(201).json({ task });
 };
 
+export const editTask = async (req, res) => {
+  const {
+    params: { id },
+    body: { title },
+  } = req;
+  await Task.findByIdAndUpdate(id, {
+    title,
+  });
+  return res.sendStatus(201);
+};
+
 export const deleteTask = async (req, res) => {
   const {
     params: { id: listId },

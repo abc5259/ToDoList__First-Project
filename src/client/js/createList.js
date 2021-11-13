@@ -291,20 +291,30 @@ const handleShowTitle = (e, title) => {
   title.classList.remove("hidden");
 };
 
-const handleEnterKey = e => {
+const handleEnterKey = async e => {
   if (e.keyCode === 13) {
     const input = e.currentTarget;
     if (input.value === "") {
       return;
     }
-    const title = document.querySelector(".task__modal__header-title h4");
     const modal = document.querySelector(".modal");
-    const task = document.querySelector(
-      `.board-list__task[data-id="${modal.dataset.id}"]`
-    );
-    task.children[0].innerText = input.value;
-    title.innerText = input.value;
-    handleShowTitle(e, title);
+    const { value: inputValue } = input;
+    const { id } = modal.dataset;
+    const response = await fetch(`/api/task/${id}/edit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: inputValue,
+      }),
+    });
+    const title = document.querySelector(".task__modal__header-title h4");
+    const task = document.querySelector(`.board-list__task[data-id="${id}"]`);
+    task.children[0].innerText = inputValue;
+    title.innerText = inputValue;
+    title.classList.remove("hidden");
+    input.classList.add("hidden");
   }
 };
 
