@@ -283,18 +283,26 @@ const handleDeleteTask = async (listId, taskId, modal) => {
   closeTaskModal(modal);
 };
 
-const handleBlur = (e, title) => {
+const handleShowTitle = (e, title) => {
   e.currentTarget.classList.add("hidden");
   title.classList.remove("hidden");
 };
 
+const handleEnterKey = (e, title) => {
+  if (e.keyCode === 13) {
+    title.innerText = e.currentTarget.value;
+    handleShowTitle(e, title);
+  }
+};
+
 const clickTaskHeader = e => {
   const [i, title, input] = e.currentTarget.children;
-  console.log(title, input);
+  input.value = title.innerText;
   title.classList.add("hidden");
   input.classList.remove("hidden");
   input.focus();
-  input.addEventListener("blur", e => handleBlur(e, title));
+  input.addEventListener("blur", e => handleShowTitle(e, title));
+  input.addEventListener("keyup", e => handleEnterKey(e, title));
 };
 
 const handleClickTask = async e => {
