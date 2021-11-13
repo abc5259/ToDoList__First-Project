@@ -151,11 +151,17 @@ export const watchTask = async (req, res) => {
   return res.status(201).json({ task });
 };
 
-export const deleteTask = (req, res) => {
+export const deleteTask = async (req, res) => {
   const {
     params: { id: listId },
     body: { taskId },
   } = req;
-  console.log(listId, taskId);
+  const list = await List.findById(listId);
+  if (!list) {
+    return res.sendStatus(404);
+  }
+  await Task.findByIdAndDelete(listId);
+  list.tasks.splice(list.tasks.indexOf(taskId), 1);
+  await list.save();
   return res.sendStatus(201);
 };

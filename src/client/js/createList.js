@@ -268,17 +268,19 @@ const closeTaskModal = modal => {
   modal.classList.remove("show");
 };
 
-const handleDeleteTask = async (listId, taskId) => {
-  console.log(listId, taskId);
+const handleDeleteTask = async (listId, taskId, modal) => {
+  const task = document.querySelector(`[data-id="${taskId}"]`);
   await fetch(`/api/list/${listId}/task/delete`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.parse({
+    body: JSON.stringify({
       taskId,
     }),
   });
+  task.remove();
+  closeTaskModal(modal);
 };
 
 const handleClickTask = async e => {
@@ -304,11 +306,17 @@ const handleClickTask = async e => {
       taskDescription.value = description;
     }
     modal.classList.add("show");
-    modal.addEventListener("click", handleTaskModal);
+    modal.addEventListener("click", handleTaskModal, { once: true });
     const modalCloseBtn = taskModal.querySelector(".task__modal__close");
-    modalCloseBtn.addEventListener("click", e => closeTaskModal(modal));
+    modalCloseBtn.addEventListener("click", e => closeTaskModal(modal), {
+      once: true,
+    });
     const deleteTask = taskModal.querySelector(".deleteTask");
-    deleteTask.addEventListener("click", e => handleDeleteTask(listId, taskId));
+    deleteTask.addEventListener(
+      "click",
+      e => handleDeleteTask(listId, taskId, modal),
+      { once: true }
+    );
   }
 };
 
