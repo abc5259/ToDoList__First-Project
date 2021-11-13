@@ -2,15 +2,15 @@ header
   ul
     div.header__column 
       if loggedIn
-        a(href="/users/home").header__title
+        a(href="/").header__title
           li ToDo
       else  
         a(href="/").header__title
           li ToDo
     div.header__column 
       if loggedIn
-        a(href="/boards/new")
-          li New board 
+        a(href="/users/home")
+          li My board 
         a(href="/logout") 
           li Logout
         a(href="/profile")

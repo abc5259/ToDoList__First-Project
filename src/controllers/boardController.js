@@ -5,9 +5,6 @@ import Task from "../models/Task";
 import User from "../models/User";
 
 export const home = async (req, res) => {
-  if (req.session && req.session.user) {
-    return res.redirect("/users/home");
-  }
   return res.render("home", { pageTitle: "Home" });
 };
 

@@ -283,6 +283,20 @@ const handleDeleteTask = async (listId, taskId, modal) => {
   closeTaskModal(modal);
 };
 
+const handleBlur = (e, title) => {
+  e.currentTarget.classList.add("hidden");
+  title.classList.remove("hidden");
+};
+
+const clickTaskHeader = e => {
+  const [i, title, input] = e.currentTarget.children;
+  console.log(title, input);
+  title.classList.add("hidden");
+  input.classList.remove("hidden");
+  input.focus();
+  input.addEventListener("blur", e => handleBlur(e, title));
+};
+
 const handleClickTask = async e => {
   const task = e.currentTarget;
   const { id } = task.dataset;
@@ -302,15 +316,23 @@ const handleClickTask = async e => {
       ".task__modal__description__content textarea"
     );
     taskTitle.innerText = title;
-    if (!description === "") {
-      taskDescription.value = description;
-    }
+    taskDescription.value = description;
+
+    // Open Task Modal
     modal.classList.add("show");
     modal.addEventListener("click", handleTaskModal, { once: true });
+
+    // close Tasj Modal
     const modalCloseBtn = taskModal.querySelector(".task__modal__close");
     modalCloseBtn.addEventListener("click", e => closeTaskModal(modal), {
       once: true,
     });
+
+    // Edit Task Title
+    const taskHeader = document.querySelector(".task__modal__header-title");
+    taskHeader.addEventListener("click", clickTaskHeader);
+
+    // Delete Task
     const deleteTask = taskModal.querySelector(".deleteTask");
     deleteTask.addEventListener(
       "click",
