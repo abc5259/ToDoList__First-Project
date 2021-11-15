@@ -158,7 +158,6 @@ const paintTask = async (taskTitle, form) => {
     }),
   });
   const json = await response.json();
-  console.log(json);
   if (response.status === 201) {
     const { taskId } = json;
     const task = document.createElement("div");
@@ -207,7 +206,6 @@ const handlEditBtn = async (input, btn, h3) => {
   const { value: title } = input;
   const list = input.parentNode.parentNode;
   const { id } = list.dataset;
-  console.log(id);
   const response = await fetch(`/api/list/${id}/edit`, {
     method: "POST",
     headers: {
@@ -397,6 +395,49 @@ const handleClickTask = async e => {
 
 const registerEventsOnTask = task => {
   task.addEventListener("click", handleClickTask);
+  task.addEventListener("dragstart", e => {
+    task.classList.add("draggingTask");
+  });
+
+  task.addEventListener("dragend", e => {
+    task.classList.remove("draggingTask");
+  });
+};
+
+const getTaskAfterDraggingTask = (tasksWrapper, yDraggingTask) => {
+  let notDraggingTasks = [
+    ...tasksWrapper.querySelectorAll(".board-list__task:not(.draggingTask)"),
+  ];
+  return notDraggingTasks.reduce(
+    (closestTask, nextTask) => {
+      let nextTaskRect = nextTask.getBoundingClientRect();
+      let offset = yDraggingTask - nextTaskRect.top - nextTaskRect.height / 2;
+
+      if (offset < 0 && offset > closestTask.offset) {
+        return { offset, element: nextTask };
+      } else {
+        return closestTask;
+      }
+    },
+    { offset: Number.NEGATIVE_INFINITY }
+  ).element;
+};
+
+const handleTaskDragOver = e => {
+  e.preventDefault();
+  let draggingTask = document.querySelector(".draggingTask");
+  let taskAfterDraggingTask = getTaskAfterDraggingTask(
+    e.currentTarget,
+    e.clientY
+  );
+  if (taskAfterDraggingTask) {
+    taskAfterDraggingTask.parentNode.insertBefore(
+      draggingTask,
+      taskAfterDraggingTask
+    );
+  } else {
+    e.currentTarget.appendChild(draggingTask);
+  }
 };
 
 lists.forEach(list => {
@@ -419,6 +460,7 @@ tasksWrappers.forEach(tasksWrapper => {
       registerEventsOnTask(task);
     });
   }
+  tasksWrapper.addEventListener("dragover", handleTaskDragOver);
 });
 
 addListForm.addEventListener("submit", handleSubmit);
