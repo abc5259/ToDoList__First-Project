@@ -7,6 +7,7 @@ import {
   deleteTask,
   editList,
   editTask,
+  editTaskDescription,
   updateList,
   watchTask,
 } from "../controllers/boardController";
@@ -26,6 +27,7 @@ apiRouter.delete("/board/:id/list/delete", deleteList);
 apiRouter.post("/list/:id/task/create", createTask);
 apiRouter.post("/task/:id", watchTask);
 apiRouter.post("/task/:id/edit", editTask);
+apiRouter.post("/task/:id/edit-description", editTaskDescription);
 apiRouter.delete("/list/:id/task/delete", deleteTask);
 
 export default apiRouter;

@@ -134,7 +134,6 @@ export const createTask = async (req, res) => {
   }
   list.tasks.push(task.id);
   await list.save();
-  console.log(list);
   return res.status(201).json({ taskId: task.id });
 };
 
@@ -144,7 +143,6 @@ export const watchTask = async (req, res) => {
   if (!task) {
     return res.sendStatus(404);
   }
-  console.log(task);
   return res.status(201).json({ task });
 };
 
@@ -155,6 +153,17 @@ export const editTask = async (req, res) => {
   } = req;
   await Task.findByIdAndUpdate(id, {
     title,
+  });
+  return res.sendStatus(201);
+};
+
+export const editTaskDescription = async (req, res) => {
+  const {
+    params: { id },
+    body: { description },
+  } = req;
+  const task = await Task.findByIdAndUpdate(id, {
+    description: description.trim(),
   });
   return res.sendStatus(201);
 };

@@ -328,6 +328,24 @@ const clickTaskHeader = (e, taskId) => {
   input.addEventListener("keyup", handleEnterKey);
 };
 
+const descriptionBtnClick = async e => {
+  const modal = document.querySelector(".modal");
+  const textarea = document.querySelector(
+    ".task__modal__description__content textarea"
+  );
+  const description = textarea.value;
+  // if (description === "") return;
+  await fetch(`/api/task/${modal.dataset.id}/edit-description`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      description,
+    }),
+  });
+};
+
 const handleClickTask = async e => {
   const task = e.currentTarget;
   const { id } = task.dataset;
@@ -360,6 +378,12 @@ const handleClickTask = async e => {
     // Edit Task Title
     const taskHeader = document.querySelector(".task__modal__header-title");
     taskHeader.addEventListener("click", e => clickTaskHeader(e, taskId));
+
+    // Edit Task Description
+    const descriptionBtn = document.querySelector(
+      ".task__modal__description__button button"
+    );
+    descriptionBtn.addEventListener("click", descriptionBtnClick);
 
     // Delete Task
     const deleteTask = taskModal.querySelector(".deleteTask");
