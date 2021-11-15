@@ -92,7 +92,9 @@
             cursor: pointer;
           }
         }
-
+        .board-list__tasks {
+          min-height: 10px;
+        }
         .board-list__task {
           cursor: pointer;
           display: flex;

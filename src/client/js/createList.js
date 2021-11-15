@@ -426,6 +426,9 @@ const getTaskAfterDraggingTask = (tasksWrapper, yDraggingTask) => {
 const handleTaskDragOver = e => {
   e.preventDefault();
   let draggingTask = document.querySelector(".draggingTask");
+  if (!draggingTask) {
+    return;
+  }
   let taskAfterDraggingTask = getTaskAfterDraggingTask(
     e.currentTarget,
     e.clientY
