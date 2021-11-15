@@ -121,6 +121,9 @@ const addListFront = (value, id) => {
   registerEventsOnTaskForm(taskForm);
   const moreList = li.querySelector(".moreList");
   registerEventsOnMoreList(moreList);
+  // taskWrapper에 dragover event 등록
+  const taskWrapper = li.querySelector(".board-list__tasks");
+  taskWrapper.addEventListener("dragover", handleTaskDragOver);
 };
 
 const handleSubmit = async e => {
@@ -398,7 +401,6 @@ const registerEventsOnTask = task => {
   task.addEventListener("dragstart", e => {
     task.classList.add("draggingTask");
   });
-
   task.addEventListener("dragend", e => {
     task.classList.remove("draggingTask");
   });
