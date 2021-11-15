@@ -272,7 +272,7 @@ const closeTaskModal = modal => {
 };
 
 const handleDeleteTask = async (listId, taskId, modal) => {
-  const task = document.querySelector(`[data-id="${taskId}"]`);
+  const task = document.querySelector(`.board-list__task[data-id="${taskId}"]`);
   await fetch(`/api/list/${listId}/task/delete`, {
     method: "DELETE",
     headers: {
