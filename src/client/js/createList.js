@@ -348,6 +348,7 @@ const descriptionBtnClick = async e => {
 };
 
 const handleClickTask = async e => {
+  console.log("click");
   const task = e.currentTarget;
   const { id } = task.dataset;
   const response = await fetch(`/api/task/${id}`, {
@@ -401,8 +402,23 @@ const registerEventsOnTask = task => {
   task.addEventListener("dragstart", e => {
     task.classList.add("draggingTask");
   });
-  task.addEventListener("dragend", e => {
-    task.classList.remove("draggingTask");
+  task.addEventListener("dragend", async e => {
+    const currentList = task.parentNode.parentNode;
+    const { id } = currentList.dataset;
+    const taskIndex = [...task.parentNode.children].indexOf(task);
+    const response = await fetch(`/api/list/${id}/task/update`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        taskId: task.dataset.id,
+        taskIndex,
+      }),
+    });
+    if (response.status === 201) {
+      task.classList.remove("draggingTask");
+    }
   });
 };
 
@@ -460,7 +476,7 @@ taskForms.forEach(taskForm => {
 
 tasksWrappers.forEach(tasksWrapper => {
   if (tasksWrapper.childNodes) {
-    tasks = document.querySelectorAll(".board-list__task");
+    tasks = tasksWrapper.querySelectorAll(".board-list__task");
     tasks.forEach(task => {
       registerEventsOnTask(task);
     });

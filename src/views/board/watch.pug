@@ -56,10 +56,7 @@ block board
                 div.board-list__task(draggable="true", data-id=task._id)
                   h6=task.title
                   i.fas.fa-edit
-
-
-
-          
+                  
 block scripts 
   script(src="/static/js/createList.js") 
   if board.lists.length > 0

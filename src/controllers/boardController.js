@@ -1,4 +1,5 @@
 //root
+import { async } from "regenerator-runtime";
 import Board from "../models/Board";
 import List from "../models/List";
 import Task from "../models/Task";
@@ -65,7 +66,6 @@ export const createList = async (req, res) => {
   });
   board.lists.push(list._id);
   await board.save();
-  console.log(board, list);
   return res.status(201).json({ listId: list._id });
 };
 
@@ -165,6 +165,32 @@ export const editTaskDescription = async (req, res) => {
   const task = await Task.findByIdAndUpdate(id, {
     description: description.trim(),
   });
+  return res.sendStatus(201);
+};
+
+export const updateTask = async (req, res) => {
+  const {
+    params: { id },
+    body: { taskId, taskIndex },
+  } = req;
+  const task = await Task.findById(taskId);
+  const list = await List.findById(id);
+  if (id === String(task.list)) {
+    if (list.tasks.indexOf(taskId) !== taskIndex) {
+      list.tasks.splice(list.tasks.indexOf(taskId), 1);
+      list.tasks.splice(taskIndex, 0, taskId);
+      await list.save();
+    }
+  } else {
+    const preList = await List.findById(task.list);
+    console.log(preList.tasks.indexOf(taskId));
+    preList.tasks.splice(preList.tasks.indexOf(taskId), 1);
+    list.tasks.splice(taskIndex, 0, taskId);
+    task.list = list._id;
+    await preList.save();
+    await list.save();
+    await task.save();
+  }
   return res.sendStatus(201);
 };
 
