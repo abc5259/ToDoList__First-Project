@@ -2,10 +2,12 @@ header
   ul
     div.header__column 
       if loggedIn
-        a(href="/").header__title
+        a(href="/users/home").header__title
+          i.far.fa-check-circle
           li ToDo
       else  
         a(href="/").header__title
+          i.far.fa-check-circle
           li ToDo
     div.header__column 
       if loggedIn

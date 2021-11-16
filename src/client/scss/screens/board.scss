@@ -1,5 +1,5 @@
 #board {
-  padding: 70px 20px;
+  padding: 100px 20px 0;
   height: 100vh;
   .board__header {
     display: flex;
@@ -45,7 +45,7 @@
     margin-top: 20px;
     ul.board-lists {
       display: grid;
-      grid-template-columns: repeat(4, 280px);
+      grid-template-columns: repeat(4, 300px);
       align-items: start;
       column-gap: 30px;
       li.board-list {
@@ -72,7 +72,7 @@
         }
         .board-list__form {
           display: flex;
-          justify-content: space-between;
+          justify-content: space-around;
           margin-bottom: 10px;
           input {
             border: none;
