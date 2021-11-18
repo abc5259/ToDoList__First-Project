@@ -78,7 +78,13 @@ export const userHome = async (req, res) => {
     .render("user/userHome", { pageTitle: "userHome", user });
 };
 
-export const profile = (req, res) => {
+export const profile = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.redirect("/");
+  }
+  console.log(user);
   return res.render("user/profile", { pageTitle: "Profile" });
 };
 

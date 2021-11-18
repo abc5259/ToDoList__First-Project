@@ -15,7 +15,7 @@ header
           li My board 
         a(href="/logout") 
           li Logout
-        a(href="/profile")
+        a(href=`/users/${loggedInUser._id}`)
           li=loggedInUser.name 
       else
         a(href="/login") 
