@@ -1,11 +1,11 @@
-extends ../base
+//- extends ../base
 
-block content 
-  div.wrapper
-    form.editUserForm
-      label(for="avatarUrl") avatar
-      input(id="avatarUrl", type="file", name="avatarUrl")
-      input(type="text", name="email", value=loggedInUser.email)
-      input(type="text", name="name", value=loggedInUser.name)
-      if !loggedInUser.socialOnly 
-        a(href="change-password") Change Password  &rarr;
+//- block content 
+//-   div.wrapper
+//-     form.editUserForm(enctype="multipart/form-data", method="POST")
+//-       label(for="avatarUrl") avatar
+//-       input(id="avatarUrl", type="file", name="avatarUrl")
+//-       input(type="text", name="email", value=loggedInUser.email)
+//-       input(type="text", name="name", value=loggedInUser.name)
+//-       if !loggedInUser.socialOnly 
+//-         a(href="change-password") Change Password  &rarr;

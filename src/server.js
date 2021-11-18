@@ -13,7 +13,7 @@ const app = express();
 app.set("views", `${process.cwd()}/src/views`);
 app.set("view engine", "pug");
 app.use(morgan("dev"));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
   session({
@@ -27,6 +27,7 @@ app.use(
 );
 app.use(localsMiddleware);
 app.use("/static", express.static("assets"));
+app.use("/uploads", express.static("uploads"));
 
 app.use("/", rootRouter);
 app.use("/boards", boardRouter);

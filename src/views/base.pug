@@ -9,6 +9,8 @@ html(lang="en")
     title #{pageTitle} | #{siteName} 
   body 
     include partials/header
+    if errorMessage 
+      span=errorMessage
     block content
     block board
     

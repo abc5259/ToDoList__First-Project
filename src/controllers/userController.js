@@ -78,18 +78,35 @@ export const userHome = async (req, res) => {
     .render("user/userHome", { pageTitle: "userHome", user });
 };
 
-export const profile = async (req, res) => {
-  const { id } = req.params;
-  const user = await User.findById(id);
-  if (!user) {
-    return res.redirect("/");
-  }
-  console.log(user);
-  return res.render("user/profile", { pageTitle: "Profile" });
+export const getEditProfile = (req, res) => {
+  return res.render("user/edit-profile", { pageTitle: "Edit Profile" });
 };
 
-export const edit = (req, res) => {
-  return res.render("user/edit", { pageTitle: "User Edit" });
+export const postEditProfile = async (req, res) => {
+  const pageTitle = "Edit Profle";
+  const { email, name } = req.body;
+  const { file } = req;
+  const { _id, avatarUrl } = req.session.user;
+  if (req.session.user.email !== email) {
+    const match = await User.exists({ email });
+    if (match) {
+      return res.status(404).render("user/edit-profile", {
+        pageTitle,
+        errorMessage: "이미 존재하는 이메일 입니다.",
+      });
+    }
+  }
+  const updateUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      email,
+      name,
+      avatarUrl: file ? file.path : avatarUrl,
+    },
+    { new: true }
+  );
+  req.session.user = updateUser;
+  return res.redirect("/users/edit-profile");
 };
 
 export const changePassword = (req, res) => {
