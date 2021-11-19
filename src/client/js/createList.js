@@ -168,9 +168,10 @@ const paintTask = async (taskTitle, form) => {
     task.className = "board-list__task";
     task.draggable = true;
     task.innerHTML = `
+      <div class="labels hidden"></div>
       <h6>${taskTitle}</h6>
       <i class="fas fa-edit"></i>
-  `;
+    `;
     list.children[2].appendChild(task);
     registerEventsOnTask(task);
   }
@@ -347,6 +348,22 @@ const descriptionBtnClick = async e => {
   });
 };
 
+const clickLabelBtn = e => {
+  const labelWrapper = e.currentTarget.parentElement;
+  const { id: taskId } =
+    labelWrapper.parentElement.parentElement.parentElement.dataset;
+  const [chooseLabel, currentLabel, button] = labelWrapper.children;
+  const input = chooseLabel.querySelector("input");
+  currentLabel.children[1].style.backgroundColor = input.value;
+  currentLabel.classList.remove("hidden");
+
+  const currentTask = document.querySelector(
+    `.board-list__task[data-id="${taskId}"] .labels`
+  );
+  currentTask.style.backgroundColor = input.value;
+  currentTask.classList.remove("hidden");
+};
+
 const handleClickTask = async e => {
   console.log("click");
   const task = e.currentTarget;
@@ -359,13 +376,26 @@ const handleClickTask = async e => {
   });
   const json = await response.json();
   if (response.status === 201) {
-    const { title, description, list: listId, _id: taskId } = json.task;
+    const {
+      title,
+      description,
+      list: listId,
+      _id: taskId,
+      labelColor,
+    } = json.task;
     const taskModal = document.querySelector(".task__modal");
     const modal = taskModal.parentNode;
     const taskTitle = taskModal.querySelector(".task__modal__header-title h4");
     const taskDescription = taskModal.querySelector(
       ".task__modal__description__content textarea"
     );
+    const currentLabel = taskModal.querySelector(".task__modal__label-current");
+    if (labelColor) {
+      currentLabel.classList.remove("hidden");
+      currentLabel.children[1].style.backgroundColor = labelColor;
+    } else {
+      currentLabel.classList.add("hidden");
+    }
     taskTitle.innerText = title;
     taskDescription.value = description;
     modal.dataset.id = taskId;
@@ -380,6 +410,10 @@ const handleClickTask = async e => {
     // Edit Task Title
     const taskHeader = document.querySelector(".task__modal__header-title");
     taskHeader.addEventListener("click", e => clickTaskHeader(e, taskId));
+
+    //Edit labelColor
+    const labelBtn = taskModal.querySelector(".task__modal__label button");
+    labelBtn.addEventListener("click", clickLabelBtn);
 
     // Edit Task Description
     const descriptionBtn = document.querySelector(
