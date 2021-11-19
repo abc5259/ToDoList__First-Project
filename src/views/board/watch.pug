@@ -11,6 +11,10 @@ block board
         div.task__modal__close
           i.fas.fa-times
       div.task__modal__info 
+        div.task__modal__label 
+          label(for="label") label의 색깔읠 고르세요!
+          input(type="color", name="label", id="label")
+          button Create
         div.task__modal__description 
           div.task__modal__description__title 
             i.fas.fa-align-left 
@@ -54,6 +58,7 @@ block board
             div.board-list__tasks 
               each task in list.tasks
                 div.board-list__task(draggable="true", data-id=task._id)
+                  div.labels
                   h6=task.title
                   i.fas.fa-edit
                   

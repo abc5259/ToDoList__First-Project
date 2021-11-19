@@ -42,6 +42,9 @@
     }
   }
   .task__modal__info {
+    .task__modal__label {
+      margin-bottom: 30px;
+    }
     .task__modal__description {
       display: grid;
       grid-template-columns: 30px 1fr;
