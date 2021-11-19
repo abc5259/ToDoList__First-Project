@@ -348,20 +348,30 @@ const descriptionBtnClick = async e => {
   });
 };
 
-const clickLabelBtn = e => {
+const clickLabelBtn = async e => {
   const labelWrapper = e.currentTarget.parentElement;
   const { id: taskId } =
     labelWrapper.parentElement.parentElement.parentElement.dataset;
-  // 백엔드로 task label craete하기
-  const [chooseLabel, currentLabel, button] = labelWrapper.children;
+  const [chooseLabel, currentLabel] = labelWrapper.children;
   const input = chooseLabel.querySelector("input");
-  currentLabel.children[1].style.backgroundColor = input.value;
+  let labelColor = input.value;
+  // 백엔드로 task label craete하기
+  const response = await fetch(`/api/task/${taskId}/edit-label`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      labelColor,
+    }),
+  });
+  currentLabel.children[1].style.backgroundColor = labelColor;
   currentLabel.classList.remove("hidden");
 
   const currentTask = document.querySelector(
     `.board-list__task[data-id="${taskId}"] .labels`
   );
-  currentTask.style.backgroundColor = input.value;
+  currentTask.style.backgroundColor = labelColor;
   currentTask.classList.remove("hidden");
 };
 

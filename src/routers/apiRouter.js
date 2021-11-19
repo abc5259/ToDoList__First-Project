@@ -7,6 +7,7 @@ import {
   deleteTask,
   editList,
   editTask,
+  editTaskLabelColor,
   editTaskDescription,
   updateList,
   updateTask,
@@ -29,6 +30,7 @@ apiRouter.post("/list/:id/task/create", createTask);
 apiRouter.post("/list/:id/task/update", updateTask);
 apiRouter.post("/task/:id", watchTask);
 apiRouter.post("/task/:id/edit", editTask);
+apiRouter.post("/task/:id/edit-label", editTaskLabelColor);
 apiRouter.post("/task/:id/edit-description", editTaskDescription);
 apiRouter.delete("/list/:id/task/delete", deleteTask);
 

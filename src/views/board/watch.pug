@@ -62,7 +62,10 @@ block board
             div.board-list__tasks 
               each task in list.tasks
                 div.board-list__task(draggable="true", data-id=task._id)
-                  div.labels.hidden
+                  if task.labelColor
+                    div.labels(style=`backgroundColor: ${task.labelColor}`)
+                  else 
+                    div.labels.hidden
                   h6=task.title
                   i.fas.fa-edit
                   

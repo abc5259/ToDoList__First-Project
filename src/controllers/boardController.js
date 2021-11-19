@@ -157,6 +157,18 @@ export const editTask = async (req, res) => {
   return res.sendStatus(201);
 };
 
+export const editTaskLabelColor = async (req, res) => {
+  const {
+    params: { id },
+    body: { labelColor },
+  } = req;
+  console.log(id, labelColor);
+  const task = await Task.findByIdAndUpdate(id, {
+    labelColor,
+  });
+  return res.sendStatus(201);
+};
+
 export const editTaskDescription = async (req, res) => {
   const {
     params: { id },
