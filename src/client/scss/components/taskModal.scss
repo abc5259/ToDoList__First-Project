@@ -44,6 +44,29 @@
   .task__modal__info {
     .task__modal__label {
       margin-bottom: 30px;
+      .task__modal__label-input {
+        label {
+          margin-right: 10px;
+        }
+      }
+      .task__modal__label-current {
+        margin-bottom: 10px;
+        h3 {
+          margin-bottom: 5px;
+        }
+        .currentLabel {
+          width: 40px;
+          height: 40px;
+          border-radius: 5px;
+        }
+      }
+      button {
+        border: none;
+        padding: 10px 15px;
+        border-radius: 10px;
+        color: #ffffff;
+        background-color: #036aa7;
+      }
     }
     .task__modal__description {
       display: grid;

@@ -12,8 +12,12 @@ block board
           i.fas.fa-times
       div.task__modal__info 
         div.task__modal__label 
-          label(for="label") label의 색깔읠 고르세요!
-          input(type="color", name="label", id="label")
+          div.task__modal__label-input
+            label(for="label") <i class="fas fa-tag"></i> label의 색깔을 고르세요! 
+            input(type="color", name="label", id="label")
+          div.task__modal__label-current.hidden
+            h3 Label
+            div.currentLabel
           button Create
         div.task__modal__description 
           div.task__modal__description__title 
