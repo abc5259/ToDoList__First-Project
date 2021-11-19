@@ -352,6 +352,7 @@ const clickLabelBtn = e => {
   const labelWrapper = e.currentTarget.parentElement;
   const { id: taskId } =
     labelWrapper.parentElement.parentElement.parentElement.dataset;
+  // 백엔드로 task label craete하기
   const [chooseLabel, currentLabel, button] = labelWrapper.children;
   const input = chooseLabel.querySelector("input");
   currentLabel.children[1].style.backgroundColor = input.value;
@@ -390,11 +391,18 @@ const handleClickTask = async e => {
       ".task__modal__description__content textarea"
     );
     const currentLabel = taskModal.querySelector(".task__modal__label-current");
+    const taskLabel = task.children[0];
     if (labelColor) {
       currentLabel.classList.remove("hidden");
       currentLabel.children[1].style.backgroundColor = labelColor;
     } else {
-      currentLabel.classList.add("hidden");
+      if (taskLabel.classList.contains("hidden")) {
+        currentLabel.classList.add("hidden");
+      } else {
+        currentLabel.classList.remove("hidden");
+        currentLabel.children[1].style.backgroundColor =
+          taskLabel.style.backgroundColor;
+      }
     }
     taskTitle.innerText = title;
     taskDescription.value = description;
