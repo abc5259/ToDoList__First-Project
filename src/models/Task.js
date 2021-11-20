@@ -6,7 +6,7 @@ const taskSchema = new mongoose.Schema({
   description: { type: String },
   createdAt: { type: Date, default: Date.now, required: true },
   labelColor: { type: String },
-  // comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 const Task = mongoose.model("Task", taskSchema);

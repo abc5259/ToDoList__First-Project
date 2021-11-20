@@ -1,8 +1,9 @@
 extends base 
 
 block content
-  div.wrapper
+  div#loginFormWrapper
     form(method="POST") 
+      h3 Login
       input(type="email", required, name="email", placeholder="Email")
       input(type="password", required, name="password", placeholder="Password")
       input(type="submit", value="Login")

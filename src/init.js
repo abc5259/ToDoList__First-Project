@@ -6,7 +6,7 @@ import "./models/List";
 import "./models/Task";
 import app from "./server.js";
 
-const PORT = 5000;
+const PORT = 3000;
 
 const handlerListen = () => {
   console.log(`✅ Server listening on port http://localhost:${PORT} 🔥`);
