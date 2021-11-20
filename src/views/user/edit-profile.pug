@@ -1,12 +1,13 @@
 extends ../base
 
 block content 
-  div.wrapper
+  div#formWrapper
     form.editUserForm(enctype="multipart/form-data", method="POST")
+      h3 Edit Profile
       label(for="avatar") avatar
       input(id="avatar", type="file", name="avatar")
       input(type="text", name="email", value=loggedInUser.email)
       input(type="text", name="name", value=loggedInUser.name)
-      button Edit Profile
+      input(type="submit", value="Edit")
       if !loggedInUser.socialOnly 
         a(href="change-password") Change Password  &rarr;

@@ -9,12 +9,12 @@
 @import "./components/header.scss";
 @import "./components/modal.scss";
 @import "./components/taskModal.scss";
+@import "./components/form.scss";
 
 // Screens
 @import "./screens/userHome.scss";
 @import "./screens/board.scss";
 @import "./screens/home.scss";
-@import "./screens/login.scss";
 
 body {
   font-family: "Open Sans", sans-serif;
