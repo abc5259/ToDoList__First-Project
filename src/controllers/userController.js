@@ -99,8 +99,8 @@ export const postEditProfile = async (req, res) => {
   const updateUser = await User.findByIdAndUpdate(
     _id,
     {
-      email,
-      name,
+      email: email ? email : req.session.user.email,
+      name: name ? name : req.session.user.name,
       avatarUrl: file ? file.path : avatarUrl,
     },
     { new: true }

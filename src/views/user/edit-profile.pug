@@ -6,8 +6,10 @@ block content
       h3 Edit Profile
       label(for="avatar") avatar
       input(id="avatar", type="file", name="avatar")
-      input(type="text", name="email", value=loggedInUser.email)
-      input(type="text", name="name", value=loggedInUser.name)
+      label(for="email") Email
+      input(type="text", name="email", value=loggedInUser.email, id="email")
+      label(for="name") Name
+      input(type="text", name="name", value=loggedInUser.name, id="name")
       input(type="submit", value="Edit")
       if !loggedInUser.socialOnly 
         a(href="change-password") Change Password  &rarr;

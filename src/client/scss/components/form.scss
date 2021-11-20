@@ -28,10 +28,10 @@
     }
     input:not([type="submit"]) {
       font-size: 1.1rem;
-      width: 90%;
-      padding: 10px 5px 5px;
+      width: 100%;
+      padding: 10px 0 5px;
       border: none;
-      border-bottom: 2px solid #b8b8b8;
+      border-bottom: 2px solid #dfdfdf;
       transition: border 0.3s;
       margin-bottom: 20px;
       &:focus {
@@ -53,6 +53,11 @@
       font-size: 1.1rem;
       width: 90%;
       padding: 10px 5px;
+    }
+    label {
+      align-self: flex-start;
+      font-size: 0.9rem;
+      color: rgba(70, 136, 140, 0.5);
     }
   }
 }
