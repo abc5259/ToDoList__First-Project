@@ -13,10 +13,17 @@ header
       if loggedIn
         a(href="/users/home")
           li My board 
+        a(href=`/users/edit-profile`)
+          li Edit Profile
         a(href="/logout") 
           li Logout
-        a(href=`/users/edit-profile`)
-          li=loggedInUser.name 
+        if loggedInUser.avatarUrl
+          a(href=`/users/edit-profile`)
+            li 
+              img(src=`/${loggedInUser.avatarUrl}`)#avatarImage
+        else 
+          a(href=`/users/edit-profile`)
+            li=loggedInUser.name 
       else
         a(href="/login") 
           li Login 
