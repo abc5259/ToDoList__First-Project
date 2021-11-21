@@ -7,12 +7,16 @@ import {
   postJoin,
   postLogin,
 } from "../controllers/userController";
+import { protectedMiddleware, publicOnlyMiddleware } from "../middleware";
 
 const rootRouter = express.Router();
 
-rootRouter.get("/", home);
-rootRouter.get("/logout", logout);
-rootRouter.route("/join").get(getJoin).post(postJoin);
-rootRouter.route("/login").get(getLogin).post(postLogin);
+rootRouter.get("/", publicOnlyMiddleware, home);
+rootRouter.route("/join").all(publicOnlyMiddleware).get(getJoin).post(postJoin);
+rootRouter
+  .route("/login")
+  .all(publicOnlyMiddleware)
+  .get(getLogin)
+  .post(postLogin);
 
 export default rootRouter;

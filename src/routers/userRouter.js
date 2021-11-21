@@ -1,19 +1,20 @@
 import express from "express";
 import {
   getEditProfile,
-  logout,
   changePassword,
   userHome,
   postEditProfile,
+  logout,
 } from "../controllers/userController";
-import { uploadFile } from "../middleware";
+import { protectedMiddleware, uploadFile } from "../middleware";
 
 const userController = express.Router();
 
-userController.get("/home", userHome);
-userController.get("/logout", logout);
+userController.get("/logout", protectedMiddleware, logout);
+userController.get("/home", protectedMiddleware, userHome);
 userController
   .route("/edit-profile")
+  .all(protectedMiddleware)
   .get(getEditProfile)
   .post(uploadFile.single("avatar"), postEditProfile);
 userController.get("/changePassword", changePassword);
