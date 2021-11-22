@@ -312,8 +312,10 @@ const handleEnterKey = async e => {
       }),
     });
     const title = document.querySelector(".task__modal__header-title h4");
-    const task = document.querySelector(`.board-list__task[data-id="${id}"]`);
-    task.children[0].innerText = inputValue;
+    const task = document.querySelector(
+      `.board-list__task[data-id="${id}"] h6`
+    );
+    task.innerText = inputValue;
     title.innerText = inputValue;
     title.classList.remove("hidden");
     input.classList.add("hidden");
