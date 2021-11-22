@@ -5,6 +5,7 @@ import {
   userHome,
   postEditProfile,
   logout,
+  profile,
 } from "../controllers/userController";
 import { protectedMiddleware, uploadFile } from "../middleware";
 
@@ -17,6 +18,7 @@ userController
   .all(protectedMiddleware)
   .get(getEditProfile)
   .post(uploadFile.single("avatar"), postEditProfile);
+userController.get("/profile", protectedMiddleware, profile);
 userController.get("/changePassword", changePassword);
 
 export default userController;

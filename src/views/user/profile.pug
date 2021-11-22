@@ -1,11 +1,18 @@
-//- extends ../base
+extends ../base
 
-//- block content 
-//-   div.wrapper
-//-     form.editUserForm(enctype="multipart/form-data", method="POST")
-//-       label(for="avatarUrl") avatar
-//-       input(id="avatarUrl", type="file", name="avatarUrl")
-//-       input(type="text", name="email", value=loggedInUser.email)
-//-       input(type="text", name="name", value=loggedInUser.name)
-//-       if !loggedInUser.socialOnly 
-//-         a(href="change-password") Change Password  &rarr;
+block content 
+  main.user-main
+    div.user__box
+      div.user-main__column
+        div.user-main__img(style=`background-image: url("/${loggedInUser.avatarUrl}")`)
+        div.user-main__info 
+          div.user-main__name 
+            h6 Name 
+            h3 #{loggedInUser.name} 
+          div.user-main__email 
+            h6 Email 
+            h3 #{loggedInUser.email} 
+      div.user-main__column 
+        a(href="/users/edit-profile").user-main__editBtn 
+          |Edit profile 
+      

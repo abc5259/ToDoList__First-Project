@@ -18,11 +18,11 @@ header
         a(href="/users/logout") 
           li Logout
         if loggedInUser.avatarUrl
-          a(href=`/users/edit-profile`)
+          a(href=`/users/profile`)
             li 
               img(src=`/${loggedInUser.avatarUrl}`)#avatarImage
         else 
-          a(href=`/users/edit-profile`)
+          a(href=`/users/profile`)
             li=loggedInUser.name 
       else
         a(href="/login") 
