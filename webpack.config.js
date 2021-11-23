@@ -5,7 +5,7 @@ module.exports = {
     main: "./src/client/js/main.js",
     createBoard: "./src/client/js/createBoard.js",
     createList: "./src/client/js/createList.js",
-    createCard: "./src/client/js/createCard.js",
+    sideScroll: "./src/client/js/sideScroll.js",
   },
   mode: "development",
   watch: true,

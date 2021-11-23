@@ -43,12 +43,24 @@
 
   section {
     margin-top: 20px;
+    height: 90%;
+    overflow-x: auto;
+    overflow-y: hidden;
     ul.board-lists {
-      display: grid;
-      grid-template-columns: repeat(4, 300px);
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
       align-items: start;
       column-gap: 30px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      transition: all 0.2s;
+      transform: scale(0.98);
+      will-change: transform;
       li.board-list {
+        min-width: 300px;
         padding: 5px 10px;
         border-radius: 5px;
         background-color: #ebecf0;
@@ -93,7 +105,9 @@
           }
         }
         .board-list__tasks {
+          overflow-y: auto;
           min-height: 10px;
+          max-height: 420px;
         }
         .board-list__task {
           position: relative;
@@ -125,6 +139,11 @@
         }
       }
     }
+    ul.board-lists.active {
+      cursor: grabbing;
+      cursor: -webkit-grabbing;
+      transform: scale(1);
+    }
   }
 }
 .draggingTask,
@@ -134,15 +153,15 @@
 
 .pop__over {
   position: absolute;
-  top: -30px;
-  right: -10rem;
+  top: 0px;
+  left: -10px;
   z-index: 1;
   display: none;
   width: 300px;
   padding: 10px;
   margin-bottom: 5px;
   border-radius: 5px;
-  background-color: #ffffff;
+  background: #3b82f6;
   .pop__over__header {
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;
