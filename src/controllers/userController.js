@@ -11,16 +11,16 @@ export const postJoin = async (req, res) => {
   //같은 이메일 있는 유저 있으면 X
   const emailExist = await User.exists({ email });
   if (emailExist) {
+    req.flash("error", "이미 존재하는 email입니다.");
     return res.status(400).render("join", {
       pageTitle: "Join",
-      errorMessage: "이미 존재하는 email입니다.",
     });
   }
   //패스워드 틀리면 에러 메세지
   if (password !== password2) {
+    req.flash("error", "패스워드가 일치하지 않습니다");
     return res.status(400).render("join", {
       pageTitle: "Join",
-      errorMessage: "패스워드가 일치하지 않습니다",
     });
   }
   await User.create({
@@ -40,16 +40,16 @@ export const postLogin = async (req, res) => {
   //password맞는지 확인
   const user = await User.findOne({ email });
   if (!user) {
+    req.flash("error", "존재하지 않는 이메일입니다.");
     return res.status(404).render("login", {
       pageTitle: "Login",
-      errorMessage: "존재하지 않는 이메일입니다.",
     });
   }
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
+    req.flash("error", "패스워드가 틀립니다.");
     return res.status(404).render("login", {
       pageTitle: "Login",
-      errorMessage: "패스워드가 틀립니다.",
     });
   }
   req.session.loggedIn = true;
@@ -69,9 +69,8 @@ export const userHome = async (req, res) => {
   const pageTitle = "Home";
   const user = await User.findById(sessionUser._id).populate("boards");
   if (!user) {
-    return res
-      .status(404)
-      .render("userHome", { errorMessage: "User not found", pageTitle });
+    req.flash("error", "User not found");
+    return res.status(404).render("userHome", { pageTitle });
   }
   return res
     .status(200)
@@ -94,9 +93,9 @@ export const postEditProfile = async (req, res) => {
   if (req.session.user.email !== email) {
     const match = await User.exists({ email });
     if (match) {
+      req.flash("error", "이미 존재하는 이메일 입니다.");
       return res.status(404).render("user/edit-profile", {
         pageTitle,
-        errorMessage: "이미 존재하는 이메일 입니다.",
       });
     }
   }

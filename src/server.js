@@ -7,6 +7,7 @@ import userController from "./routers/userRouter";
 import boardRouter from "./routers/boardRouter";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import flash from "express-flash";
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(
     }),
   })
 );
+app.use(flash());
 app.use(localsMiddleware);
 app.use("/static", express.static("assets"));
 app.use("/uploads", express.static("uploads"));

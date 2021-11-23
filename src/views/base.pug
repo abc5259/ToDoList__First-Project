@@ -1,3 +1,5 @@
+include mixins/message
+
 doctype html
 html(lang="en")
   head
@@ -9,8 +11,8 @@ html(lang="en")
     title #{pageTitle} | #{siteName} 
   body 
     include partials/header
-    if errorMessage 
-      span=errorMessage
+    if messages.error 
+      +message("error",messages.error)
     block content
     block board
     
