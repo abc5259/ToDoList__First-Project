@@ -162,6 +162,8 @@
   margin-bottom: 5px;
   border-radius: 5px;
   background: #3b82f6;
+  color: #ffffff;
+  font-weight: 600;
   .pop__over__header {
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;
@@ -181,8 +183,11 @@
     line-height: 2;
     div {
       cursor: pointer;
+      transition: all 0.3s;
       &:hover {
-        background-color: #f5f6f8;
+        background-color: #78a3e7;
+        border-radius: 10px;
+        padding: 10px;
       }
     }
   }

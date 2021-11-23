@@ -20,11 +20,9 @@ slider.addEventListener("mouseup", () => {
 });
 slider.addEventListener("mousemove", e => {
   if (!isDown) return;
-  // console.log(e.target);
   if (e.target !== slider) return;
   e.preventDefault();
   const x = e.pageX - slider.offsetLeft;
   const walk = (x - startX) * 3; //scroll-fast
   slider.scrollLeft = scrollLeft - walk;
-  // console.log(walk);
 });
