@@ -13,6 +13,8 @@ html(lang="en")
     include partials/header
     if messages.error 
       +message("error",messages.error)
+    if messages.info 
+      +message("info",messages.info)
     block content
     block board
     

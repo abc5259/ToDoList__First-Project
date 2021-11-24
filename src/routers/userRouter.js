@@ -1,7 +1,8 @@
 import express from "express";
 import {
   getEditProfile,
-  changePassword,
+  getChangePassword,
+  postChangePassword,
   userHome,
   postEditProfile,
   logout,
@@ -19,6 +20,10 @@ userController
   .get(getEditProfile)
   .post(uploadFile.single("avatar"), postEditProfile);
 userController.get("/profile", protectedMiddleware, profile);
-userController.get("/changePassword", changePassword);
+userController
+  .route("/change-password")
+  .all(protectedMiddleware)
+  .get(getChangePassword)
+  .post(postChangePassword);
 
 export default userController;

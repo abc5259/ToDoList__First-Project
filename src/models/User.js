@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre("save", async function () {
-  //this는 create되는 User을 가리킴
+  //this는 create,save되는 User을 가리킴
   if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 5);
   }
