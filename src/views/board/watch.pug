@@ -7,7 +7,7 @@ block board
         div.task__modal__header-title
           i.fas.fa-tv
           h4 task Title 
-          input.hidden.taskTitleInput(name="title") 
+          input.hidden.taskTitleInput(name="title", maxlength="20", required) 
         div.task__modal__close
           i.fas.fa-times
       div.task__modal__info 
@@ -24,7 +24,7 @@ block board
             i.fas.fa-align-left 
             h6 Description 
           div.task__modal__description__content 
-            textarea(placeholder="자세한 설명 추가...", rows="5")
+            textarea(placeholder="자세한 설명 추가...", rows="5", maxlength="200")
           div.task__modal__description__button 
             button Save 
         div.deleteTask 
@@ -35,7 +35,7 @@ block board
         h1=board.title 
       div.board__addList
         form.board__addList-form(method="POST")
-          input(type="text", required ,placeholder="리스트의 제목을 입력하세요")  
+          input(type="text", required ,placeholder="리스트의 제목을 입력하세요", maxlength="20")  
           div.board__addList-submit
             button Add list 
     section
@@ -43,7 +43,7 @@ block board
         each list in board.lists
           li.board-list(draggable="true", data-id=list._id)
             div.board-list__title 
-              input(value=list.title class="hidden editInput")
+              input(value=list.title class="hidden editInput",maxlength="20", required)
               button(class="hidden editBtn") edit
               h3=list.title
               i.fas.fa-ellipsis-h.moreList
@@ -57,7 +57,7 @@ block board
                   div.editList 
                     span Edit List Title
             form.board-list__form
-              input(type="text", required, name="title", placeholder="카드의 제목 입력...")
+              input(type="text", maxlength="20", required, name="title", placeholder="카드의 제목 입력...")
               button Add 
             div.board-list__tasks 
               each task in list.tasks

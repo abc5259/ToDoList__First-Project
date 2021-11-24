@@ -56,7 +56,6 @@ export const createList = async (req, res) => {
     body: { title },
   } = req;
   const board = await Board.findById(id);
-  console.log(board, "dawd");
   if (!board) {
     return res.sendStatus(404);
   }
