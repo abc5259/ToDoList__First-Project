@@ -8,7 +8,6 @@ module.exports = {
     sideScroll: "./src/client/js/sideScroll.js",
   },
   mode: "development",
-  watch: true,
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/styles.css",
