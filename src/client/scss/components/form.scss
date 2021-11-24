@@ -40,6 +40,7 @@
       }
     }
     input[type="submit"] {
+      cursor: pointer;
       margin-top: 10px;
       border: none;
       border-radius: 5px;
@@ -53,11 +54,28 @@
       font-size: 1.1rem;
       width: 90%;
       padding: 10px 5px;
+      transition: all 0.3s;
+      &:hover {
+        background: linear-gradient(
+          90deg,
+          rgba(10, 4, 126, 0.5) 0%,
+          rgba(0, 233, 245, 0.5) 0%,
+          rgba(230, 230, 230, 0.5) 100%
+        );
+      }
     }
     label {
       align-self: flex-start;
       font-size: 0.9rem;
       color: rgba(70, 136, 140, 0.5);
+    }
+    a {
+      text-decoration: none;
+      margin-top: 20px;
+      color: #3b82f6;
+      &:hover {
+        color: #0062ff;
+      }
     }
   }
 }

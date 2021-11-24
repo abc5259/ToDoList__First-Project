@@ -12,4 +12,4 @@ block content
       input(type="text", name="name", value=loggedInUser.name, id="name")
       input(type="submit", value="Edit")
       if !loggedInUser.socialOnly 
-        a(href="change-password") Change Password  &rarr;
+        a(href="change-password").user-main__editBtn  Change Password  &rarr;
