@@ -2,6 +2,8 @@
 
 나만의 To Do List를 만들 수 있습니다
 
+[To Do List 바로가기](https://todolist-first.herokuapp.com/)
+
 ## Services
 
 - Task마다 label 색깔 지정 가능
@@ -33,7 +35,7 @@
 ## 4. User Page 
 <img width="1435" alt="UserPage" src="https://user-images.githubusercontent.com/62169861/146069286-c4a7d998-112e-43a9-9295-f1eec53801a6.png">
 
-### create board를 클릭하면 다음과 같은 화면이 나옵니다.
+### Create new board를 클릭하면 다음과 같은 화면이 나옵니다.
 <img width="1436" alt="createBoard" src="https://user-images.githubusercontent.com/62169861/146069407-67d9747c-2859-4d86-85ae-4187e7c6264c.png">
 
 ## 5. Board Page
